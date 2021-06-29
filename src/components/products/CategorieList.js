@@ -1,20 +1,32 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Categorie from "./Categorie";
+import MainCategorie from "./MainCategorie";
 
 export default function CategorieList(){
-    const [categories,setCategories] = useState([]);
+    const [categories,setCategories] = useState(null);
+    const [showAll,setShowAll] = useState(false);
     useEffect(()=>{
+        setCategories([{id:1,name:'capsulas',img:''}, {id:2,name:'colirios',img:''},{id:3,name:'higiene',img:''},{id:4,name:'sprays',img:''},{id:5,name:'geis',img:''}]);
+    },[]);
 
-    },[])
+    function allCategories(){
+        const promise = axios.get('http://localhost:4000/categories')
+        promise.then(res=>{
+            setShowAll(true);
+            setCategories(res.body);
+        }); 
+    }
+
     return (
         <Body>
-            <MainCategories>
+            <Categories>
                 <h1>Principais Categorias</h1>
-                {categories.map(c=><Categorie/>)}
-            </MainCategories>
+                {categories.map(c=> showAll ? <Categorie key={c.id} categorie={c}/>:<MainCategorie key={c.id} categorie={c}/>)}
+            </Categories>
             <ShowCategories>
-                <button>Ver todas as categorias</button>
+                <button onClick={allCategories}>Ver todas as categorias</button>
             </ShowCategories>
         </Body>
     );
@@ -28,7 +40,7 @@ const Body = styled.div`
 
 `
 
-const MainCategories = styled.div`
+const Categories = styled.ul`
     width: 100%;
     height: 267px;
     background-color: #fff;

@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
-export default function Categorie(){
+export default function MainCategorie(){
     return(
         <Body>
 
         </Body>
     );
 }
-const Body = styled.li`
-
+const Body = styled.div`
 
 `

@@ -40,8 +40,9 @@ export default function CategorieList(){
 
     return (
         <Body>
+            <h1>{showAll ? 'Todas as categorias':'Principais Categorias'}</h1>
             <Categories>
-                <h1>{showAll ? 'Todas as categorias':'Principais Categorias'}</h1>
+                
                 {showAll ? categories?.map(c=> <Categorie key={c.id} categorie={c}/>):<div>{categories?.map(c=> <MainCategorie key={c.id} categorie={c} color={color[c.id-1]}/>)}</div>}
             </Categories>
             <ShowCategories>
@@ -56,20 +57,25 @@ const Body = styled.div`
     height: 308px;
     margin-top: 60px;
     color: #FF4949;
-
-`
-
-const Categories = styled.ul`
-    width: 100%;
-    height: 267px;
-    background-color: #fff;
-    border-radius: 0px 0px 0px 67px;
-    padding: 0 11%;
     h1{
         text-align: center;
         padding: 15px 0;
         font-size: 24px;
+        width: 100%;
+        background-color: #fff;
     }
+`
+
+const Categories = styled.ul`
+    width: 100%;
+    height: 213px;
+    background-color: #fff;
+    border-radius: 0px 0px 0px 67px;
+    padding: 0 11%;
+    list-style-type: disc;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     div{
         display: flex;
         justify-content: space-around;

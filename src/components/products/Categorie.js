@@ -1,15 +1,11 @@
 import styled from "styled-components";
 
-export default function Categorie({categorie,color}){
+export default function Categorie(){
     return(
-        <Body color={color}>
+        <Body >
             
         </Body>
     );
 }
 const Body = styled.li`
-    height: 189px;
-    width: 156px;
-    color:${props=>props.color}
-
 `

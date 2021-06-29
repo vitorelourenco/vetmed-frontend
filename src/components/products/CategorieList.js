@@ -64,6 +64,7 @@ const Categories = styled.ul`
     height: 267px;
     background-color: #fff;
     border-radius: 0px 0px 0px 67px;
+    padding: 0 11%;
     h1{
         text-align: center;
         padding: 15px 0;

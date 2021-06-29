@@ -17,7 +17,7 @@ export default function App() {
               <Route path="/products" exact>
                 <Products/>
               </Route>
-              <Route path="/categories" exact>
+              <Route path="/categories/:id" exact>
                 
               </Route>
               <Route path="/my-basket" exact>

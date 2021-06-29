@@ -1,27 +1,29 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function MainCategorie({categorie,color}){
     return(
-        <Body >
-            <Figure color={color}>
-                <img src={categorie.img} alt={categorie.name}/>
-                
-            </Figure>
-            <span color={color}>{categorie.name}</span>
-        </Body>
+        <Link to={`/categories/${categorie.id}`}>
+            <Body>
+                <Figure color={color}>
+                    <img src={categorie.img} alt={categorie.name}/>
+                </Figure>
+                <Name color={color}>{categorie.name}</Name>
+            </Body>
+        </Link>
+        
     );
 }
 const Body = styled.div`
     height: 189px;
-    width: 156px;
+    min-width: 13%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    span{
+`
+const Name = styled.span`
     color:${props=>props.color};
-    }
-    
 `
 const Figure = styled.div`
     width: 156px;

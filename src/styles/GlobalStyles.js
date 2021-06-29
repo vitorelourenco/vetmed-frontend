@@ -67,8 +67,10 @@ strong {
 	--dark-red: #C10000;
 }
 body{
-  font-family: var(--ubuntu);
-  background-color: #EEEEEE;
+	font-family: var(--ubuntu);
+	background-color: #EEEEEE;
+	font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
 }
 
 `;

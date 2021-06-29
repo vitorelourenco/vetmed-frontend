@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, useHistory } from "react-router-dom";
-import { Switch, Route } from "react-router";
+import { Switch,Route } from "react-router";
 import axios from "axios";
 
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Products from "./components/products/Products";
 
 import UserContext from "./contexts/UserContext";
 
-import GlobalStyles from "./components/GlobalStyles";
+import GlobalStyles from "./styles/GlobalStyles";
 import { PublicOnlyRoute } from "./components/PrivateRoute";
 import Header from './components/Header';
 
@@ -61,6 +62,9 @@ function App() {
             component={Signup}
           />
           <Route to="/mock" component={Header}/>
+          <Route path="/" exact>
+            <Products/>
+          </Route>
         </Switch>
       </BrowserRouter>
     </UserContext.Provider>

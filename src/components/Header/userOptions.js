@@ -37,4 +37,8 @@ const UserOptionsBox = styled.div`
   line-height: 22px;
   color: white;
   font-family: Ubuntu;
+
+  @media (max-width: 768px){
+    font-size: 16px;
+  }
 `;

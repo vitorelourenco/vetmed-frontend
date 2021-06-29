@@ -18,8 +18,9 @@ export default function Header(){
           <img src={logo39} alt="VETMET LOGO" />
         </div>
         <div className="pageheader--menu">
-          <input className="menu--searchbar">
-          </input>
+          <div className="menu--searchbarContainer">
+            <input className="searchbarContainer--searchbar" />
+          </div>
           {isAuthed ? <AuthedUserOptions/> : <GuestUserOptions/>}
           <MenuCheckout />
         </div>
@@ -65,8 +66,30 @@ const HeaderWrapper = styled.header`
     padding: 8px;
     z-index: 1;
 
-    .menu--searchbar{
-      flex: 1 1 100%;
+    @media (max-width: 768px){
+      gap: 15px;
+      justify-content: center;
+      border-radius: 0;
+    }
+
+    .menu--searchbarContainer{
+      flex: 1 1 100vw;
+
+      input{
+        width: 100%;
+        height: 100%;
+      }
+
+      @media (max-width: 500px){
+        flex: initial;
+        width: 100vw;
+        position: absolute;
+        top: 61px;
+        left: 0;
+        background-color: var(--vivid-red);
+        height: 45px;
+        padding: 10px;
+      }
     }
   }
 `;

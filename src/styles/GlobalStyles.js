@@ -1,4 +1,7 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyles = createGlobalStyle`
+ /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -7,7 +10,7 @@ html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, sub, sup, tt, var,
+small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
@@ -46,20 +49,30 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+strong {
+  font-weight: bold;
+}
 *{
-    box-sizing: border-box;
-    font-family: 'Raleway', sans-serif;
-    font-size: 20px;
+  box-sizing: border-box;
+  font-size: inherit;
 }
-a {
-    text-decoration: none;
-    color:inherit;
+
+:root{
+	--vivid-red: #FF4949;
+	--dark-red: #C10000;
 }
-input:focus{
-    outline: none;
+body{
+	font-family: var(--ubuntu);
+	background-color: #EEEEEE;
+	font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
 }
-button{
-    color:inherit;
-    font-size:inherit;
-    font-family: inherit;
-}
+
+`;
+
+export default GlobalStyles;

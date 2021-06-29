@@ -63,6 +63,9 @@ function App() {
           <Route path="/" exact>
             <Products/>
           </Route>
+          <Route path="/categories/:id" exact>
+            <Products/>
+          </Route>
         </Switch>
       </BrowserRouter>
     </UserContext.Provider>

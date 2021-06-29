@@ -11,22 +11,30 @@ export default function CategorieList(){
         setCategories([{id:1,name:'capsulas',img:''}, {id:2,name:'colirios',img:''},{id:3,name:'higiene',img:''},{id:4,name:'sprays',img:''},{id:5,name:'geis',img:''}]);
     },[]);
 
-    function allCategories(){
-        const promise = axios.get('http://localhost:4000/categories')
-        promise.then(res=>{
-            setShowAll(true);
-            setCategories(res.body);
-        }); 
+    function toggleCategories(){
+        if(showAll){
+            const promise = axios.get('http://localhost:4000/categories')
+            promise.then(res=>{
+                setShowAll(true);
+                setCategories(res.body);
+            }); 
+            promise.catch(()=>alert('Houve um erro ao carregar as categorias'))
+        }
+        else{
+            setCategories([{id:1,name:'capsulas',img:''}, {id:2,name:'colirios',img:''},{id:3,name:'higiene',img:''},{id:4,name:'sprays',img:''},{id:5,name:'geis',img:''}]);
+            setShowAll(false);
+        }
+        
     }
 
     return (
         <Body>
             <Categories>
-                <h1>Principais Categorias</h1>
+                <h1>{showAll ? 'Principais Categorias':'Todas as categorias'}</h1>
                 {categories.map(c=> showAll ? <Categorie key={c.id} categorie={c}/>:<MainCategorie key={c.id} categorie={c}/>)}
             </Categories>
             <ShowCategories>
-                <button onClick={allCategories}>Ver todas as categorias</button>
+                <button onClick={toggleCategories}>{showAll ? 'Principais Categorias':'Todas as categorias'}</button>
             </ShowCategories>
         </Body>
     );

@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import logo39 from "../assets/images/vetmed-logo39.png";
-import UserContext from "../contexts/UserContext";
+import logo39 from "../../assets/images/vetmed-logo39.png";
+import UserContext from "../../contexts/UserContext";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { AuthedUserOptions, GuestUserOptions } from "./userOptions";
+import MenuCheckout from "./MenuCheckout";
 
 export default function Header(){
   const {user} = useContext(UserContext);
@@ -20,48 +21,12 @@ export default function Header(){
           <input className="menu--searchbar">
           </input>
           {isAuthed ? <AuthedUserOptions/> : <GuestUserOptions/>}
+          <MenuCheckout />
         </div>
       </HeaderWrapper>
     </>
   );
 }
-
-function AuthedUserOptions(){
-  return (
-    <UserOptionsBox>
-      <Link to="/signup">Minhas compras</Link>
-      <Link to="/login">Sair</Link>
-    </UserOptionsBox>
-  );
-}
-
-function GuestUserOptions(){
-  return (
-    <UserOptionsBox>
-      <Link to="/signup">Cadastre-se</Link>
-      <Link to="/login">Acesse sua conta</Link>
-    </UserOptionsBox>
-  );
-}
-
-const UserOptionsBox = styled.div`
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  a:first-child{
-    border-bottom: 1px solid white;
-    padding-bottom: 2px;
-  }
-  a{
-    width: 100%;
-    text-align: center;
-  }
-  font-size:20px;
-  line-height: 22px;
-  color: white;
-  font-family: Ubuntu;
-`;
 
 const HeaderWrapper = styled.header`
   width: 100%;

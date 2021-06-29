@@ -21,7 +21,6 @@ const Cart = styled(AiOutlineShoppingCart)`
   }
 `;
 
-
 const MenuWrapper = styled(Link)`
   flex: 0 0 128px;
   display: flex;

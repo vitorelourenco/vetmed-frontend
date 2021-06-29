@@ -61,7 +61,7 @@ function App() {
             path="/signup"
             component={Signup}
           />
-          <Route to="/mock" component={Header}/>
+          <Route path="/mock" component={Header}/>
           <Route path="/" exact>
             <Products/>
           </Route>

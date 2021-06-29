@@ -1,24 +1,67 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import { BrowserRouter, useHistory } from "react-router-dom";
+import { Switch } from "react-router";
+import axios from "axios";
+
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+
+import UserContext from "./contexts/UserContext";
+
+import GlobalStyles from "./components/GlobalStyles";
+import { PublicOnlyRoute } from "./components/PrivateRoute";
+
+import Config from "./helper_functions/Config";
+import logOut from "./helper_functions/logout";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  const [user, setUser] = useState(null);
+  const [isReadyToRender, setIsReadyToRender] = useState(false);
+  const history = useHistory();
+
+  useEffect(() => {
+    const userStorage = localStorage.getItem("user");
+    if (userStorage !== null) {
+      const localUser = JSON.parse(userStorage);
+      setUser(localUser);
+      const config = new Config(localUser.token);
+      axios
+        .post("http://localhost:4000/login/withtoken", {}, config)
+        .then(() => {
+          history.push("/");
+        })
+        .catch((err) => {
+          alert(err);
+          logOut(localUser, setUser, history);
+        })
+        .finally(() => setIsReadyToRender(true));
+    } else setIsReadyToRender(true);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const authed = user === null ? false : true;
+
+  return !isReadyToRender ? (
+    <></>
+  ) : (
+    <UserContext.Provider value={{ user, setUser }}>
+      <BrowserRouter>
+        <GlobalStyles />
+        <Switch>
+          <PublicOnlyRoute
+            exact
+            authed={authed}
+            path="/login"
+            component={Login}
+          />
+          <PublicOnlyRoute
+            exact
+            authed={authed}
+            path="/signup"
+            component={Signup}
+          />
+        </Switch>
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 }
 

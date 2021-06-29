@@ -58,3 +58,8 @@ a {
 input:focus{
     outline: none;
 }
+button{
+    color:inherit;
+    font-size:inherit;
+    font-family: inherit;
+}

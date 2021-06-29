@@ -4,6 +4,7 @@ import UserContext from "../../contexts/UserContext";
 import { useContext } from "react";
 import { AuthedUserOptions, GuestUserOptions } from "./userOptions";
 import MenuCheckout from "./MenuCheckout";
+import { DebounceInput } from "react-debounce-input";
 
 export default function Header(){
   const {user} = useContext(UserContext);
@@ -19,7 +20,10 @@ export default function Header(){
         </div>
         <div className="pageheader--menu">
           <div className="menu--searchbarContainer">
-            <input className="searchbarContainer--searchbar" />
+            <DebounceInput 
+              className="searchbarContainer--searchbar" 
+              placeholder="O que você está buscando?"
+            />
           </div>
           {isAuthed ? <AuthedUserOptions/> : <GuestUserOptions/>}
           <MenuCheckout />
@@ -45,6 +49,12 @@ const HeaderWrapper = styled.header`
     padding: 14px 10px 9px 10px;
     height: 62px;
     z-index: 1;
+    background-color: white;
+
+    @media (max-width: 588px) and (min-width: 400px){
+      flex: 1 1 100%;
+      justify-content: center;
+    }
 
     .logobox--text{
       font-size: 18px;
@@ -75,12 +85,25 @@ const HeaderWrapper = styled.header`
     .menu--searchbarContainer{
       flex: 1 1 100vw;
 
-      input{
+      .searchbarContainer--searchbar{
         width: 100%;
         height: 100%;
+        border-radius: 10px;
+        font-size: 22px;
+        border: none;
+        padding: 10px;
+
+        @media (max-width: 768px){
+          font-size: 18px;
+        }
       }
 
-      @media (max-width: 500px){
+      .searchbarContainer--searchbar::placeholder{
+        color: #848484;
+        text-align: center;
+      }
+
+      @media (max-width: 588px){
         flex: initial;
         width: 100vw;
         position: absolute;

@@ -1,9 +1,40 @@
 import styled from "styled-components";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle} from "react-icons/ai";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import CartContext from "../../contexts/CartContext";
 
 export default function Product({product}){
-    const [qtd,setqtd] = useState(0)
+    const [qtd,setQtd] = useState(0);
+    const {cart,setCart} = useContext(CartContext)
+
+    console.log(cart)
+    function addToCart(){
+        const productInCart =cart?.find(c=>c.id ===product.id);
+        if(productInCart){
+            productInCart.qtd+=qtd;
+            productInCart.total = productInCart.qtd*product.price
+            setCart(cart)
+        }
+        else if(qtd>0){
+            cart ? 
+            setCart([...cart,{
+                id:product.id,
+                name:product.name,
+                price:product.price,
+                qtd,
+                total: qtd*product.price
+            }])
+            :
+            setCart([{
+                id:product.id,
+                name:product.name,
+                price:product.price,
+                qtd,
+                total: qtd*product.price
+            }])
+        }
+        setQtd(0)
+    }
     return(
         <Body>
             <img src={product.img} alt={product.name}/>
@@ -12,12 +43,12 @@ export default function Product({product}){
                 <span>R${(product.price/100).toFixed(2).replace('.',',')}</span>
                 <Cart>
                     <div>
-                        <Plus/>
+                        <Plus onClick={()=>setQtd(qtd+1)}/>
                         {qtd}
-                        <Minus/>
+                        <Minus onClick={()=>qtd>0 && setQtd(qtd-1)}/>
                     </div>
                     
-                    <button>Comprar</button>
+                    <button onClick={addToCart}>Comprar</button>
                 </Cart>
             </Bottom>
         </Body>

@@ -26,7 +26,6 @@ export default function Products(){
             <Title>{title}</Title>
             <ProductsList>
             {products?.map(p=><Product key={p.id}  product={p}/>)}
-            
             </ProductsList>
             
         </Body>

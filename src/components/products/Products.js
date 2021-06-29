@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CategorieList from "./CategorieList";
+import CategorieList from "../categorieMenu/CategorieList";
 
 export default function Products(){
     return (

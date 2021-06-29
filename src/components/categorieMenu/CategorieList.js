@@ -13,7 +13,6 @@ export default function CategorieList(){
         const promise = axios.get('http://localhost:4000/categories?main=true')
         promise.then(res=>{
             setCategories(res.data);
-            
         }); 
         promise.catch(()=>alert('Houve um erro ao carregar as categorias'))
     },[]);
@@ -42,7 +41,6 @@ export default function CategorieList(){
         <Body>
             <h1>{showAll ? 'Todas as categorias':'Principais Categorias'}</h1>
             <Categories>
-                
                 {showAll ? categories?.map(c=> <Categorie key={c.id} categorie={c}/>):<div>{categories?.map(c=> <MainCategorie key={c.id} categorie={c} color={color[c.id-1]}/>)}</div>}
             </Categories>
             <ShowCategories>

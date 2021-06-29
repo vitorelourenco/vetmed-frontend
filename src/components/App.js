@@ -1,5 +1,7 @@
 import { BrowserRouter,Switch,Route } from "react-router-dom";
-import GlobalStyle from "./styles/GlobalStyle";
+import GlobalStyle from "../styles/GlobalStyle";
+import Products from "./products/Products";
+import "../styles/reset.css"
 
 export default function App() {
   return (
@@ -13,7 +15,7 @@ export default function App() {
                 
               </Route>
               <Route path="/products" exact>
-                
+                <Products/>
               </Route>
               <Route path="/categories" exact>
                 

@@ -89,6 +89,7 @@ const ShowCategories = styled.div`
             background-color: #fff;
             border: none;
             border-radius: 0px 0px 67px 67px;
+            color:inherit;
         }
         button:hover{
             cursor: pointer;

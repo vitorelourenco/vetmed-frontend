@@ -7,22 +7,33 @@ import MainCategorie from "./MainCategorie";
 export default function CategorieList(){
     const [categories,setCategories] = useState(null);
     const [showAll,setShowAll] = useState(false);
+    const color = ['#58479A','#9A7E47','#479A86','#9A4797','#9A4747']
+    console.log(categories)
     useEffect(()=>{
-        setCategories([{id:1,name:'capsulas',img:''}, {id:2,name:'colirios',img:''},{id:3,name:'higiene',img:''},{id:4,name:'sprays',img:''},{id:5,name:'geis',img:''}]);
+        const promise = axios.get('http://localhost:4000/categories?main=true')
+        promise.then(res=>{
+            setCategories(res.data);
+            
+        }); 
+        promise.catch(()=>alert('Houve um erro ao carregar as categorias'))
     },[]);
 
     function toggleCategories(){
-        if(showAll){
+        if(!showAll){
             const promise = axios.get('http://localhost:4000/categories')
             promise.then(res=>{
                 setShowAll(true);
-                setCategories(res.body);
+                setCategories(res.data);
             }); 
             promise.catch(()=>alert('Houve um erro ao carregar as categorias'))
         }
         else{
-            setCategories([{id:1,name:'capsulas',img:''}, {id:2,name:'colirios',img:''},{id:3,name:'higiene',img:''},{id:4,name:'sprays',img:''},{id:5,name:'geis',img:''}]);
-            setShowAll(false);
+            const promise = axios.get('http://localhost:4000/categories?main=true')
+            promise.then(res=>{
+                setShowAll(false);
+                setCategories(res.data);
+            }); 
+            promise.catch(()=>alert('Houve um erro ao carregar as categorias'))
         }
         
     }
@@ -30,8 +41,8 @@ export default function CategorieList(){
     return (
         <Body>
             <Categories>
-                <h1>{showAll ? 'Principais Categorias':'Todas as categorias'}</h1>
-                {categories.map(c=> showAll ? <Categorie key={c.id} categorie={c}/>:<MainCategorie key={c.id} categorie={c}/>)}
+                <h1>{showAll ? 'Todas as categorias':'Principais Categorias'}</h1>
+                {showAll ? categories?.map(c=> <Categorie key={c.id} categorie={c}/>):<div>{categories?.map(c=> <MainCategorie key={c.id} categorie={c} color={color[c.id-1]}/>)}</div>}
             </Categories>
             <ShowCategories>
                 <button onClick={toggleCategories}>{showAll ? 'Principais Categorias':'Todas as categorias'}</button>
@@ -58,6 +69,10 @@ const Categories = styled.ul`
         padding: 15px 0;
         font-size: 24px;
     }
+    div{
+        display: flex;
+        justify-content: space-around;
+    }
 `
 const ShowCategories = styled.div`
     width: 100%;
@@ -69,5 +84,8 @@ const ShowCategories = styled.div`
             background-color: #fff;
             border: none;
             border-radius: 0px 0px 67px 67px;
+        }
+        button:hover{
+            cursor: pointer;
         }
 `

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, useHistory } from "react-router-dom";
-import { Switch } from "react-router";
+import { Switch, Route } from "react-router";
 import axios from "axios";
 
 import Login from "./pages/Login";
@@ -10,6 +10,7 @@ import UserContext from "./contexts/UserContext";
 
 import GlobalStyles from "./components/GlobalStyles";
 import { PublicOnlyRoute } from "./components/PrivateRoute";
+import Header from './components/Header';
 
 import Config from "./helper_functions/Config";
 import logOut from "./helper_functions/logout";
@@ -59,6 +60,7 @@ function App() {
             path="/signup"
             component={Signup}
           />
+          <Route to="/mock" component={Header}/>
         </Switch>
       </BrowserRouter>
     </UserContext.Provider>

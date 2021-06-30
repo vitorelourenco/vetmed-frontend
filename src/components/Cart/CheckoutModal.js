@@ -2,10 +2,12 @@ import React from 'react';
 import ReactModal from "react-modal";
 import styled from 'styled-components';
 
-export default function CheckoutModal({setShowModal}){
+ReactModal.defaultStyles.overlay.zIndex = 5;
+
+export default function CheckoutModal({setShowCheckoutModal}){
   function ExitModal(){
     return (
-      <p style={{cursor:"pointer", flexShrink:"0", height: "100%"}} onClick={()=>setShowModal(false)}>x</p>
+      <p style={{cursor:"pointer", flexShrink:"0", height: "100%"}} onClick={()=>setShowCheckoutModal(false)}>x</p>
     )
   }
   return (
@@ -29,7 +31,7 @@ const StyledModal = styled(ReactModal)`
     transform: translate(-50%, -50%);
     max-width: 790px;
     width: 100%;
-    background: #333333;
+    background: var(--vivid-red);
     border-radius: 20px;
     user-select: none;
 

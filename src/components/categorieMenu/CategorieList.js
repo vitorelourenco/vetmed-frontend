@@ -8,7 +8,6 @@ export default function CategorieList(){
     const [categories,setCategories] = useState(null);
     const [showAll,setShowAll] = useState(false);
     const color = ['#58479A','#9A7E47','#479A86','#9A4797','#9A4747']
-    console.log(categories)
     useEffect(()=>{
         const promise = axios.get('http://localhost:4000/categories?main=true')
         promise.then(res=>{

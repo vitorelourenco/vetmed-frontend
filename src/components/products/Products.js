@@ -13,6 +13,7 @@ export default function Products(){
     const {id} = useParams();
     const [title,setTitle]= useState("");
     const [pageNumber,setPageNumber] = useState(1)
+
     useEffect(()=>{
         if(id){
             const promise = axios.get(`http://localhost:4000/products/?id=${id}&limit=8&offset=${(pageNumber-1)*8}`)

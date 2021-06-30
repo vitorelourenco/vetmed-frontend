@@ -55,6 +55,7 @@ function App() {
       <CartContext.Provider value={{cart,setCart}}>
         <BrowserRouter>
           <GlobalStyles />
+          <Header/>
           <Switch>
             <PublicOnlyRoute
               exact

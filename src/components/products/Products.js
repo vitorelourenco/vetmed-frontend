@@ -15,14 +15,15 @@ export default function Products(){
         if(id){
             const promise = axios.get(`http://localhost:4000/products/?id=${id}&limit=8&offset=${(pageNumber-1)*8}`)
             promise.then(res=>{
-                setProducts(res.data)
-                setTitle(res.data[0].categoryName);
+                console.log(res.data)
+                setProducts(res.data.products)
+                setTitle(res.data.name);
             })
         }
         else{
             const promise = axios.get(`http://localhost:4000/products?limit=8`)
             promise.then(res=>{
-                setProducts(res.data)
+                setProducts(res.data.products)
                 setTitle('Os Mais Vendidos');
             })
         }
@@ -31,11 +32,11 @@ export default function Products(){
         <Body>
             <CategorieList/>
             <Title>{title}</Title>
-            <ProductsList>
+            <ProductsList length={products.length}>
                 {products?.map(p=><Product key={p.id}  product={p}/>)}
             </ProductsList> 
             {
-                id && <Next onClick={()=>setPageNumber(pageNumber+1)}>Proxima pagina</Next>
+                id && products?.length>8 && <Next onClick={()=>setPageNumber(pageNumber+1)}>Proxima pagina</Next>
             }
         </Body>
     );
@@ -53,9 +54,12 @@ const Title = styled.h1`
     font-size: 24px;
 `
 const ProductsList = styled.div`
+    height: 532px;
     display: flex;
+    flex-direction: ${props=>props.length<8 ?'column':'row'};
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
     padding: 0 11%;
     width: 1300px;
     margin: 0 auto;

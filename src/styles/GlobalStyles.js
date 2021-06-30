@@ -71,6 +71,7 @@ body{
 	background-color: #EEEEEE;
 	font-family: 'Ubuntu', sans-serif;
     font-size: 18px;
+	padding-bottom: 50px;
 }
 
 `;

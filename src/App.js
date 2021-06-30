@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { BrowserRouter, useHistory } from "react-router-dom";
 import { Switch,Route } from "react-router";
 import axios from "axios";
+import Modal from "react-modal";
 
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Products from "./components/products/Products";
+import Cart from "./pages/Cart";
 
 import UserContext from "./contexts/UserContext";
 
@@ -20,6 +22,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [isReadyToRender, setIsReadyToRender] = useState(false);
   const history = useHistory();
+  Modal.setAppElement(document.querySelector(".root"));
 
   useEffect(() => {
     const userStorage = localStorage.getItem("user");
@@ -64,6 +67,9 @@ function App() {
           <Route path="/mock" component={Header}/>
           <Route path="/" exact>
             <Products/>
+          </Route>
+          <Route path="/cart" exact>
+            <Cart/>
           </Route>
         </Switch>
       </BrowserRouter>

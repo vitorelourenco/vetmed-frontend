@@ -7,12 +7,16 @@ import MenuCheckout from "./MenuCheckout";
 import { DebounceInput } from "react-debounce-input";
 import axios from "axios";
 import SearchResults from "./SearchResults";
+import { useLocation } from "react-router-dom";
 
 export default function Header() {
   const { user } = useContext(UserContext);
   const [searchResults, setSearchResults] = useState(null);
   const isAuthed = user ? true : false;
   const [focus,setFocus] = useState(false)
+  const local = useLocation();
+  console.log(local.pathname)
+  if(local.pathname==='/signup'||local.pathname==='/login') return null
   return (
     <>
       <HeaderBackground />
@@ -72,8 +76,6 @@ function searchProducts(keyword, setSearchResults,setFocus) {
 const HeaderWrapper = styled.header`
   width: 100%;
   max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
   background-image: linear-gradient(
     90deg,
     white,
@@ -84,8 +86,10 @@ const HeaderWrapper = styled.header`
   display: flex;
   position: fixed;
   top: 0;
-  left: 0;
-
+  left: calc(50% - 600px);
+  @media(max-width:1200px){
+    left: 0;
+  }
   .pageheader--logobox {
     flex: 0 0 auto;
     display: flex;

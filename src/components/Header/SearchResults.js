@@ -8,7 +8,7 @@ export default function SearchResults({ searchResults, className }) {
       <ul>
         {searchResults?.map((result) => (
           <li>
-            <img src={result.img}/>
+            <img src={result.img} alt={result.name}/>
             <Link to={result.url}>{result.name}</Link>
           </li>
         )) || "Nenhum resultado encontrado"}

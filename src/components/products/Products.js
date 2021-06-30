@@ -61,9 +61,8 @@ const Title = styled.h1`
     font-size: 24px;
 `
 const ProductsList = styled.div`
-    height: 532px;
     display: flex;
-    flex-direction: ${props=>props.length<8 ?'column':'row'};
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;

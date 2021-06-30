@@ -13,8 +13,6 @@ export default function Header() {
   const [searchResults, setSearchResults] = useState(null);
   const isAuthed = user ? true : false;
   const [focus,setFocus] = useState(false)
-
-  console.log(searchResults);
   return (
     <>
       <HeaderBackground />
@@ -34,13 +32,13 @@ export default function Header() {
               placeholder="O que você está buscando?"
               minLength={3}
               debounceTimeout={300}
-              onFocus={()=>setFocus(true)}
+              onFocus={(e)=>e.target.value.length> 2 && setFocus(true)}
               onBlur={()=>setFocus(false)}
               onChange={(e) => {
-                searchProducts(e.target.value, setSearchResults);
+                searchProducts(e.target.value, setSearchResults,setFocus);
               }}
             />
-            {searchResults && focus &&
+            {focus &&
             (
               <SearchResults
                 className="searchbarContainer--results"
@@ -56,11 +54,13 @@ export default function Header() {
   );
 }
 
-function searchProducts(keyword, setSearchResults) {
+function searchProducts(keyword, setSearchResults,setFocus) {
   if (keyword === "") {
     setSearchResults(null);
+    setFocus(false)
     return;
   }
+  setFocus(true)
   axios
     .get(`http://localhost:4000/products/search?product=${keyword}`)
     .then(({ data }) => {

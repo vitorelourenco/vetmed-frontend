@@ -6,7 +6,6 @@ import CartContext from '../../contexts/CartContext';
 
 export default function MenuCheckout(){
   const {cart} = useContext(CartContext)
-  console.log(cart)
   return(
     <MenuWrapper to="/checkout">
       <Cart />

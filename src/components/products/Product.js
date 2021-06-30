@@ -20,6 +20,8 @@ export default function Product({product}){
             setCart([...cart,{
                 id:product.id,
                 name:product.name,
+                description:product.description,
+                img:product.img,
                 price:product.price,
                 qtd,
                 total: qtd*product.price
@@ -28,9 +30,12 @@ export default function Product({product}){
             setCart([{
                 id:product.id,
                 name:product.name,
+                description:product.description,
+                img:product.img,
                 price:product.price,
                 qtd,
                 total: qtd*product.price
+
             }])
         }
         setQtd(0)

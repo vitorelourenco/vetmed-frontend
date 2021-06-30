@@ -21,10 +21,10 @@ export default function Products(){
             })
         }
         else{
-            const promise = axios.get(`http://localhost:4000/products?limit=8`)
+            const promise = axios.get(`http://localhost:4000/products?limit=8&offset=${(pageNumber-1)*8}`)
             promise.then(res=>{
                 setProducts(res.data.products)
-                setTitle('Os Mais Vendidos');
+                setTitle(res.data.name);
             })
         }
     },[id,pageNumber])
@@ -35,9 +35,16 @@ export default function Products(){
             <ProductsList length={products?.length}>
                 {products?.map(p=><Product key={p.id}  product={p}/>)}
             </ProductsList> 
+            
+            <ChangePage page={pageNumber}>
+            {pageNumber>1 && <Back onClick={()=>setPageNumber(pageNumber-1)}>Pangina anterior</Back>}
             {
-                id && products?.length>8 && <Next onClick={()=>setPageNumber(pageNumber+1)}>Proxima pagina</Next>
+                id && products?.length===8 && <Next onClick={()=>setPageNumber(pageNumber+1)}>Proxima pagina</Next>
             }
+            {
+                !id && products?.length===8 && <Next onClick={()=>setPageNumber(pageNumber+1)}>Veja Mais...</Next>
+            }
+            </ChangePage>
         </Body>
     );
 }
@@ -67,9 +74,22 @@ const ProductsList = styled.div`
         width: 100%;
     }
 `
-const Next = styled.div`
+const ChangePage = styled.div`
+width: 100%;
+display: flex;
+justify-content: ${props=>props.page===1?'flex-end':'space-between'};
+`
+const Next = styled.button`
     padding: 0 11% 10px  11%;
-    width: 100%;
     text-align: end;
     color: #FF4949;
+    border: none;
 `
+const Back = styled.button`
+    padding: 0 11% 10px  11%;
+    text-align: start;
+    color: #FF4949;
+    border: none;
+`
+
+    

@@ -6,11 +6,13 @@ import CategorieList from "../categorieMenu/CategorieList";
 import Product from "./Product";
 
 export default function Products(){
+    //send a message to parent element when accessed (used for iframe logic)
+    window.parent.postMessage('url_changed', '*');
+
     const [products,setProducts] = useState(null)
     const {id} = useParams();
     const [title,setTitle]= useState("");
     const [pageNumber,setPageNumber] = useState(1)
-    console.log(products)
     useEffect(()=>{
         if(id){
             const promise = axios.get(`http://localhost:4000/products/?id=${id}&limit=8&offset=${(pageNumber-1)*8}`)

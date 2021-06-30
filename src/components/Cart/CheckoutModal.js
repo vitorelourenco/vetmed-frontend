@@ -1,8 +1,31 @@
-import React from 'react';
+import React,{useContext, useEffect, useState, useRef} from 'react';
 import ReactModal from "react-modal";
 import styled from 'styled-components';
+import UserContext from '../../contexts/UserContext';
+import CartContext from '../../contexts/CartContext';
+import EmbededAuth from './EmbededAuth';
+
 
 ReactModal.defaultStyles.overlay.zIndex = 5;
+
+// route /products will send a message when accessed
+// this custom hook will fetch the message and run the callback
+const useEmbededAuth = (callback) =>{
+  const onReceiveMessage = event => {
+    let { data } = event;
+    switch (data) {
+      case 'url_changed':
+          callback();
+          break;
+      default:
+          break;
+    }
+  };
+  useEffect(()=>{
+    window.addEventListener("message", onReceiveMessage)
+    return () => window.removeEventListener("message", onReceiveMessage)
+  })
+}
 
 export default function CheckoutModal({setShowCheckoutModal}){
   function ExitModal(){
@@ -10,6 +33,17 @@ export default function CheckoutModal({setShowCheckoutModal}){
       <p style={{cursor:"pointer", flexShrink:"0", height: "100%"}} onClick={()=>setShowCheckoutModal(false)}>x</p>
     )
   }
+  const {user, setUser} = useContext(UserContext);
+  const [isAuthed,setIsAuthed] = useState(!!user);
+
+  //update the user when login is successful
+  useEmbededAuth(()=>{
+    const userStorage = localStorage.getItem("user");
+    const localUser = JSON.parse(userStorage);
+    setUser(localUser);
+    setIsAuthed(true);
+  });
+
   return (
     <StyledModal
       isOpen={true}
@@ -18,6 +52,7 @@ export default function CheckoutModal({setShowCheckoutModal}){
       <Header>
         <ExitModal />
       </Header>
+      {isAuthed?"":<EmbededAuth />}
     </StyledModal>
   );
 }

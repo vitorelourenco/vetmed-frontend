@@ -19,12 +19,13 @@ import Config from "./helper_functions/Config";
 import logOut from "./helper_functions/logout";
 import CartContext from "./contexts/CartContext";
 
+Modal.setAppElement(document.querySelector("#root"));
+
 function App() {
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState(null);
   const [isReadyToRender, setIsReadyToRender] = useState(false);
   const history = useHistory();
-  Modal.setAppElement(document.querySelector(".root"));
 
   useEffect(() => {
     const userStorage = localStorage.getItem("user");
@@ -35,7 +36,7 @@ function App() {
       axios
         .post("http://localhost:4000/login/withtoken", {}, config)
         .then(() => {
-          history.push("/");
+          // history.push("/");
         })
         .catch((err) => {
           alert(err);

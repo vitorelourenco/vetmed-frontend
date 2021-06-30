@@ -7,7 +7,6 @@ export default function Product({product}){
     const [qtd,setQtd] = useState(0);
     const {cart,setCart} = useContext(CartContext)
 
-    console.log(cart)
     function addToCart(){
         const productInCart =cart?.find(c=>c.id ===product.id);
         if(productInCart){

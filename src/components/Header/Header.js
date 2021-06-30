@@ -13,7 +13,6 @@ export default function Header() {
   const [searchResults, setSearchResults] = useState(null);
   const isAuthed = user ? true : false;
 
-  console.log(searchResults);
   return (
     <>
       <HeaderBackground />

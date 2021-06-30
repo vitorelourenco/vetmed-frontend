@@ -86,6 +86,7 @@ const HeaderWrapper = styled.header`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 10;
 
   .pageheader--logobox {
     flex: 0 0 auto;

@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
+import CartContext from "../../contexts/CartContext";
+import { useContext } from "react";
 
 export default function FlexCartRows({ cart }) {
   return (
@@ -12,6 +14,32 @@ export default function FlexCartRows({ cart }) {
 }
 
 function CartProduct({ product }) {
+
+  const {cart, setCart} = useContext(CartContext);
+  
+  function decrementQtd(){
+    if(product.qtd === 1) return;
+    product.qtd--;
+    product.total -= product.price;
+    setCart([...cart]);
+  }
+
+  function incrementQtd(){
+    product.qtd++;
+    product.total += product.price;
+    setCart([...cart]);
+  }
+
+  function removeProduct(){
+    const result = window.confirm("Deseja remover esse produto do carrinho?");
+    if (result) {
+      const newCart = [...cart];
+      const productIndex = cart.indexOf(product);
+      newCart.splice(productIndex,1);
+      setCart(newCart);
+    }
+  }
+
   return (
     <div>
       <CartProductWrapper>
@@ -25,9 +53,9 @@ function CartProduct({ product }) {
         <div className="product--amount">
           <p className="center-flex-text">Quantidade</p>
           <div className="flex-center">
-            <AiOutlineMinusCircle />
+            <AiOutlineMinusCircle onClick={()=>decrementQtd()}/>
             &nbsp;{product.qtd}&nbsp;
-            <AiOutlinePlusCircle />
+            <AiOutlinePlusCircle onClick={()=>incrementQtd()}/>
           </div>
         </div>
         <div className="product--total">
@@ -38,7 +66,7 @@ function CartProduct({ product }) {
           </p>
         </div>
       </CartProductWrapper>
-      <RemoveProduct>Remover produto</RemoveProduct>
+      <RemoveProduct onClick={()=>removeProduct()}>Remover produto</RemoveProduct>
     </div>
   );
 }
@@ -156,6 +184,12 @@ const CartProductWrapper = styled.li`
     width: 100px;
     margin-left: auto;
     font-size: 0.85em;
+    user-select: none;
+
+    @media (max-width: 400px){
+      margin-left: 0;
+      margin-right: auto;
+    }
   }
 
   .product--total {

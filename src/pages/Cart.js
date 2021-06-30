@@ -24,9 +24,9 @@ export default function Cart() {
             return (acc += (product.qtd * product.price) / 100);
           }, 0)
           .toFixed(2)
-          .replace(".", ",") || "NaN"}
+          .replace(".", ",") || "-"}
         &nbsp;
-        <GoToCheckout onClick={() => setShowCheckoutModal(true)}>
+        <GoToCheckout disabled={(cart?.length || 0) === 0} onClick={() => setShowCheckoutModal(true)}>
           Comprar
         </GoToCheckout>
       </OrderSummaryWrapper>
@@ -108,4 +108,7 @@ const GoToCheckout = styled.button`
   border-radius: 5px;
   color: white;
   cursor: pointer;
+  :disabled{
+    filter:brightness(0.3);
+  }
 `;

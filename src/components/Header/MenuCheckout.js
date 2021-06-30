@@ -1,12 +1,16 @@
 import {AiOutlineShoppingCart} from 'react-icons/ai';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import CartContext from '../../contexts/CartContext';
 
 export default function MenuCheckout(){
+  const {cart} = useContext(CartContext)
+  console.log(cart)
   return(
     <MenuWrapper to="/checkout">
       <Cart />
-      <ItemCounter numberOfItems={2}/>
+      <ItemCounter numberOfItems={cart?.length || 0}/>
       <p className="checkout--text">Finalizar<br/>Pedido</p>
     </MenuWrapper>
   );

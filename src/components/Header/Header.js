@@ -63,7 +63,7 @@ function searchProducts(keyword, setSearchResults) {
     return;
   }
   axios
-    .get(`http://localhost:4000/products?keyword=${keyword}`)
+    .get(`http://localhost:4000/products/search?product=${keyword}`)
     .then(({ data }) => setSearchResults(data))
     .catch((err) => alert(err));
 }

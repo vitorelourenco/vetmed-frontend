@@ -7,7 +7,6 @@ export default function Product({product}){
     const [qtd,setQtd] = useState(0);
     const {cart,setCart} = useContext(CartContext)
 
-    console.log(cart)
     function addToCart(){
         const productInCart =cart?.find(c=>c.id ===product.id);
         if(productInCart){
@@ -48,9 +47,10 @@ export default function Product({product}){
                 <span>R${(product.price/100).toFixed(2).replace('.',',')}</span>
                 <Cart>
                     <div>
-                        <Plus onClick={()=>setQtd(qtd+1)}/>
-                        {qtd}
                         <Minus onClick={()=>qtd>0 && setQtd(qtd-1)}/>
+                        {qtd}
+                        <Plus onClick={()=>setQtd(qtd+1)}/>
+                        
                     </div>
                     <button onClick={addToCart}>Comprar</button>
                 </Cart>
@@ -93,8 +93,10 @@ const Cart = styled.div`
     justify-content: space-between;
     button{
         border: none;
-        background-color: red;
-        border-radius: 10px;
+        background-color: #c10000;
+        border-radius: 5px;
+        color:#fff;
+        font-weight: 700;
     }
     div{
         display: flex;

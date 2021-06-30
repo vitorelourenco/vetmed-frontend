@@ -15,7 +15,6 @@ export default function Header() {
   const isAuthed = user ? true : false;
   const [focus,setFocus] = useState(false)
   const local = useLocation();
-  console.log(local.pathname)
   if(local.pathname==='/signup'||local.pathname==='/login') return null
   return (
     <>

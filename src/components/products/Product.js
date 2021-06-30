@@ -47,7 +47,6 @@ export default function Product({product}){
                         {qtd}
                         <Minus onClick={()=>qtd>0 && setQtd(qtd-1)}/>
                     </div>
-                    
                     <button onClick={addToCart}>Comprar</button>
                 </Cart>
             </Bottom>
@@ -55,8 +54,8 @@ export default function Product({product}){
     )
 }
 const Body = styled.div`
-    width: 216px;
-    height: 301px;
+    width: 206px;
+    height: 241px;
     background-color: #fff;
     border-radius: 10px;
     margin-bottom: 25px;

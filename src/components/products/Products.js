@@ -9,8 +9,15 @@ export default function Products(){
     const [products,setProducts] = useState(null)
     const {id} = useParams();
     const [title,setTitle]= useState("");
+    const [pageNumber,setPageNumber] = useState(1)
+    console.log(products)
     useEffect(()=>{
         if(id){
+            const promise = axios.get(`http://localhost:4000/products/?id=${id}&limit=8&offset=${(pageNumber-1)*8}`)
+            promise.then(res=>{
+                setProducts(res.data)
+                setTitle(res.data[0].categoryName);
+            })
         }
         else{
             const promise = axios.get(`http://localhost:4000/products?limit=8`)
@@ -19,15 +26,17 @@ export default function Products(){
                 setTitle('Os Mais Vendidos');
             })
         }
-    },[id])
+    },[id,pageNumber])
     return (
         <Body>
             <CategorieList/>
             <Title>{title}</Title>
             <ProductsList>
-            {products?.map(p=><Product key={p.id}  product={p}/>)}
-            </ProductsList>
-            
+                {products?.map(p=><Product key={p.id}  product={p}/>)}
+            </ProductsList> 
+            {
+                id && <Next onClick={()=>setPageNumber(pageNumber+1)}>Proxima pagina</Next>
+            }
         </Body>
     );
 }
@@ -53,4 +62,10 @@ const ProductsList = styled.div`
     @media(max-width:1300px){
         width: 100%;
     }
+`
+const Next = styled.div`
+    padding: 0 11% 10px  11%;
+    width: 100%;
+    text-align: end;
+    color: #FF4949;
 `

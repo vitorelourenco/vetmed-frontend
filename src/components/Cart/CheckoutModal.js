@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import UserContext from '../../contexts/UserContext';
 import CartContext from '../../contexts/CartContext';
 import EmbededAuth from './EmbededAuth';
+import PlaceOrder from './PlaceOrder';
 
 
 ReactModal.defaultStyles.overlay.zIndex = 5;
@@ -34,8 +35,9 @@ export default function CheckoutModal({setShowCheckoutModal}){
     )
   }
   const {user, setUser} = useContext(UserContext);
+  const {cart} = useContext(CartContext);
   const [isAuthed,setIsAuthed] = useState(!!user);
-
+  console.log(cart);
   //update the user when login is successful
   useEmbededAuth(()=>{
     const userStorage = localStorage.getItem("user");
@@ -52,7 +54,7 @@ export default function CheckoutModal({setShowCheckoutModal}){
       <Header>
         <ExitModal />
       </Header>
-      {isAuthed?"":<EmbededAuth />}
+      {isAuthed?<PlaceOrder cart={cart}/>:<EmbededAuth />}
     </StyledModal>
   );
 }

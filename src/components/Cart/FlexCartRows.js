@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 
-export default function FlexCartRows({ products }) {
+export default function FlexCartRows({ cart }) {
   return (
     <CartProducts>
-      {products?.map((product) => (
+      {cart?.map((product) => (
         <CartProduct key={product.id} product={product} />
       ))}
     </CartProducts>

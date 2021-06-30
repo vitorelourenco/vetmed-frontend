@@ -7,59 +7,19 @@ import UserContext from "../contexts/UserContext";
 import Header from "../components/Header/Header";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import CheckoutModal from "../components/Cart/CheckoutModal";
-
-class FormState {
-  constructor(name, email) {
-    this.email = "";
-    this.password = "";
-  }
-}
-
-const products = [
-  {
-    img: "https://conteudo.imguol.com.br/c/entretenimento/24/2020/09/15/banana-1600197261350_v2_1254x836.jpg",
-    id: "1",
-    description:
-      "sou bananasou bananasou bananasou bananasou bananasou bananasou banana",
-    name: "test1",
-    price: "300",
-    qtd: "5",
-    total: "1500",
-  },
-  {
-    img: "https://superprix.vteximg.com.br/arquivos/ids/175207-600-600/Maca-Argentina--1-unidade-aprox.-200g-.png?v=636294203590200000",
-    id: "2",
-    description: "sou maca",
-    name: "test2",
-    price: "300",
-    qtd: "2",
-    total: "600",
-  },
-  {
-    img: "https://hiperideal.vteximg.com.br/arquivos/ids/167745-1000-1000/80764.jpg?v=636615816415070000",
-    id: "3",
-    description: "sou pera",
-    name: "test3",
-    price: "400000",
-    qtd: "5",
-    total: "2000",
-  },
-];
-
-// const products = [];
+import CartContext from "../contexts/CartContext";
 
 export default function Cart() {
   const { user, setUser } = useContext(UserContext);
-  const [formState, setFormState] = useState(
-    new FormState(user?.name, user?.email)
-  );
-  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
 
-  function OrderSummaryRow({ products }) {
+  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
+  const {cart} = useContext(CartContext);
+
+  function OrderSummaryRow() {
     return (
       <OrderSummaryWrapper>
         Total:&nbsp;R$&nbsp;
-        {products
+        {cart
           ?.reduce((acc, product) => {
             return (acc += (product.qtd * product.price) / 100);
           }, 0)
@@ -82,12 +42,12 @@ export default function Cart() {
           <AiOutlineShoppingCart />
         </PageTitle>
         <ProductsWrapper>
-          {products?.length > 0 ? (
-            <FlexCartRows products={products} />
+          {cart?.length > 0 ? (
+            <FlexCartRows cart={cart} />
           ) : (
             "Nenhum produto no carrinho"
           )}
-          <OrderSummaryRow products={products} />
+          <OrderSummaryRow cart={cart} />
         </ProductsWrapper>
       </CartWrapper>
       {showCheckoutModal ? (
@@ -102,19 +62,21 @@ export default function Cart() {
 const CartWrapper = styled.div`
   margin-left: 10px;
   margin-right: 10px;
+  margin-top: 120px;
+
+  @media (max-width: 588px) {
+    margin-top: 130px;
+  }
 `;
 
 const PageTitle = styled.h1`
-  margin-top: 60px;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-  @media (max-width: 588px) {
-    margin-top: 120px;
-  }
+
   font-size: 20px;
   font-family: "Viga", sans-serif;
   color: var(--vivid-red);

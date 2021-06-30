@@ -14,9 +14,11 @@ import { PublicOnlyRoute } from "./components/PrivateRoute";
 
 import Config from "./helper_functions/Config";
 import logOut from "./helper_functions/logout";
+import CartContext from "./contexts/CartContext";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [cart, setCart] = useState(null);
   const [isReadyToRender, setIsReadyToRender] = useState(false);
   const history = useHistory();
 
@@ -45,26 +47,31 @@ function App() {
     <></>
   ) : (
     <UserContext.Provider value={{ user, setUser }}>
-      <BrowserRouter>
-        <GlobalStyles />
-        <Switch>
-          <PublicOnlyRoute
-            exact
-            authed={authed}
-            path="/login"
-            component={Login}
-          />
-          <PublicOnlyRoute
-            exact
-            authed={authed}
-            path="/signup"
-            component={Signup}
-          />
-          <Route path="/" exact>
-            <Products/>
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <CartContext.Provider value={{cart,setCart}}>
+        <BrowserRouter>
+          <GlobalStyles />
+          <Switch>
+            <PublicOnlyRoute
+              exact
+              authed={authed}
+              path="/login"
+              component={Login}
+            />
+            <PublicOnlyRoute
+              exact
+              authed={authed}
+              path="/signup"
+              component={Signup}
+            />
+            <Route path="/" exact>
+              <Products/>
+            </Route>
+            <Route path="/categories/:id" exact>
+              <Products/>
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </CartContext.Provider>
     </UserContext.Provider>
   );
 }

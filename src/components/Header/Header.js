@@ -12,6 +12,7 @@ export default function Header() {
   const { user } = useContext(UserContext);
   const [searchResults, setSearchResults] = useState(null);
   const isAuthed = user ? true : false;
+  const [focus,setFocus] = useState(false)
 
   console.log(searchResults);
   return (
@@ -33,21 +34,19 @@ export default function Header() {
               placeholder="O que você está buscando?"
               minLength={3}
               debounceTimeout={300}
+              onFocus={()=>setFocus(true)}
+              onBlur={()=>setFocus(false)}
               onChange={(e) => {
                 searchProducts(e.target.value, setSearchResults);
               }}
             />
-            {searchResults ? (
+            {searchResults && focus &&
+            (
               <SearchResults
                 className="searchbarContainer--results"
                 searchResults={searchResults}
               />
-            ) : (
-              <SearchResults
-                className="searchbarContainer--results"
-                searchResults={searchResults}
-              />
-            )}
+            ) }
           </div>
           {isAuthed ? <AuthedUserOptions /> : <GuestUserOptions />}
           <MenuCheckout />
@@ -64,7 +63,9 @@ function searchProducts(keyword, setSearchResults) {
   }
   axios
     .get(`http://localhost:4000/products/search?product=${keyword}`)
-    .then(({ data }) => setSearchResults(data))
+    .then(({ data }) => {
+      data.length===0 ? setSearchResults(null):setSearchResults(data) ;
+    })
     .catch((err) => alert(err));
 }
 
@@ -81,7 +82,9 @@ const HeaderWrapper = styled.header`
     #ff4949 100%
   );
   display: flex;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
 
   .pageheader--logobox {
     flex: 0 0 auto;
@@ -160,7 +163,7 @@ const HeaderWrapper = styled.header`
         margin-left: 10px;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
-        max-height: 50vh;
+        max-height: 20vh;
       }
     }
   }
@@ -175,9 +178,9 @@ const HeaderBackground = styled.div`
     #ff4949 100%
   );
   height: 62px;
-  width: 100vw;
+  width: 100%;
   z-index: 0;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
 `;

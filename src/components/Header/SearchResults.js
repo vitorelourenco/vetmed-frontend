@@ -8,6 +8,7 @@ export default function SearchResults({ searchResults, className }) {
       <ul>
         {searchResults?.map((result) => (
           <li>
+            <img src={result.img}/>
             <Link to={result.url}>{result.name}</Link>
           </li>
         )) || "Nenhum resultado encontrado"}
@@ -19,7 +20,7 @@ export default function SearchResults({ searchResults, className }) {
 const ResultsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  max-height: 50vh;
+  
   width: 100%;
   background-color: white;
   overflow-y: scroll;
@@ -37,5 +38,17 @@ const ResultsWrapper = styled.div`
   }
   ::-webkit-scrollbar-thumb {
     background: #dad7d7;
+  }
+  li{
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    color:  var(--vivid-red);
+  }
+  img{
+    width:30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
   }
 `;

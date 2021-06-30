@@ -32,7 +32,7 @@ export default function Products(){
         <Body>
             <CategorieList/>
             <Title>{title}</Title>
-            <ProductsList length={products.length}>
+            <ProductsList length={products?.length}>
                 {products?.map(p=><Product key={p.id}  product={p}/>)}
             </ProductsList> 
             {

@@ -43,7 +43,7 @@ export default function Product({product}){
     }
     return(
         <Body>
-            <ProductDescription product={product} open={isOpen} setIsOpen={setIsOpen}/>
+            <ProductDescription product={product} open={isOpen} setIsOpen={setIsOpen} qtd={qtd} setQtd={setQtd} addToCart={addToCart}/>
             <div onClick={()=>{setIsOpen(true)}}>
             <img src={product.img} alt={product.name}/>
             <span>{product.name}</span>

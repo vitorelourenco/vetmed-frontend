@@ -2,9 +2,9 @@ import { Dialog,DialogContent,DialogTitle,DialogActions } from "@material-ui/cor
 import styled from "styled-components";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle} from "react-icons/ai";
 
-export default function ProductDescription({open,product,setIsOpen,qtd,setQtd,addToCart}){
+export default function ProductDescription({open,product,setIsOpen,qtd,setQtd,addToCart,cart,setCart}){
     return(
-        <Dialog open={open} onBackdropClick={()=>{setIsOpen(false)}} onClose={()=>{setIsOpen(false)}}>
+        <Dialog open={open}  onClose={()=>{setIsOpen(false)}}>
             <DialogTitle>{product.name}</DialogTitle>
             <DialogContent>
                 <Top>
@@ -16,7 +16,7 @@ export default function ProductDescription({open,product,setIsOpen,qtd,setQtd,ad
                             <Plus onClick={()=>setQtd(qtd+1)}/>
                         </div>
                         <span>R${(product.price/100).toFixed(2).replace('.',',')}</span>
-                        <button onClick={()=>{addToCart();setIsOpen(false)}}>Comprar</button>
+                        <button onClick={()=>{addToCart(qtd,product,setQtd,cart,setCart);setIsOpen(false)}}>Comprar</button>
                     </Cart>
                 </Top>
                 <div>

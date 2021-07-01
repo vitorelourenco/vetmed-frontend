@@ -8,6 +8,7 @@ import { DebounceInput } from "react-debounce-input";
 import axios from "axios";
 import SearchResults from "./SearchResults";
 import { useLocation } from "react-router-dom";
+import { AiOutlineClose } from "react-icons/ai";
 
 export default function Header() {
   const { user } = useContext(UserContext);
@@ -15,6 +16,18 @@ export default function Header() {
   const isAuthed = user ? true : false;
   const [focus,setFocus] = useState(false)
   const local = useLocation();
+
+  function closeFocus(e){
+    console.log(e.relatedTarget?.firstChild?.localName )
+    console.log(e)
+    if(e.relatedTarget?.firstChild?.localName !=='img' && e.relatedTarget?.firstChild?.localName !=='div')
+    {
+      setFocus(false)
+    }
+
+    
+  }
+
   if(local.pathname==='/signup'||local.pathname==='/login') return null
   return (
     <>
@@ -29,14 +42,14 @@ export default function Header() {
           <img src={logo39} alt="VETMET LOGO" />
         </div>
         <div className="pageheader--menu">
-          <div className="menu--searchbarContainer">
+          <div className="menu--searchbarContainer" onBlur={closeFocus}>
+            <Close onClick={closeFocus}/>
             <DebounceInput
               className="searchbarContainer--searchbar"
               placeholder="O que você está buscando?"
               minLength={3}
               debounceTimeout={300}
               onFocus={(e)=>e.target.value.length> 2 && setFocus(true)}
-              onBlur={()=>setFocus(false)}
               onChange={(e) => {
                 searchProducts(e.target.value, setSearchResults,setFocus);
               }}
@@ -131,7 +144,7 @@ const HeaderWrapper = styled.header`
 
     .menu--searchbarContainer {
       flex: 1 1 100vw;
-
+      position: relative;
       @media (max-width: 588px) {
         flex: initial;
         width: 100vw;
@@ -187,3 +200,10 @@ const HeaderBackground = styled.div`
   top: 0;
   left: 0;
 `;
+
+const Close = styled(AiOutlineClose)`
+  position: absolute;
+  top: 30%;
+  right: 10px;
+  color:  var(--vivid-red);
+`

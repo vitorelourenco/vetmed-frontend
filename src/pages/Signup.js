@@ -30,7 +30,7 @@ export default function Signup() {
     const body = { ...formState };
     delete body["confirmPassword"];
     axios
-      .post("http://localhost:4000/signup", body)
+      .post(`${process.env.REACT_APP_API_BASE_URL}/signup`, body)
       .then(() => history.push("/login"))
       .catch((err) => {
         setIsInteractive(true);

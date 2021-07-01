@@ -11,7 +11,7 @@ export default function CategorieList(){
     const color = ['#58479A','#9A7E47','#479A86','#9A4797','#9A4747'];
     const width = useMediaQuery('(min-width:750px)')
     useEffect(()=>{
-        const promise = axios.get('http://localhost:4000/categories?main=true')
+        const promise = axios.get(`${process.env.REACT_APP_API_BASE_URL}/categories?main=true`)
         promise.then(res=>{
             setCategories(res.data);
         }); 
@@ -20,7 +20,7 @@ export default function CategorieList(){
 
     function toggleCategories(){
         if(!showAll){
-            const promise = axios.get('http://localhost:4000/categories')
+            const promise = axios.get(`${process.env.REACT_APP_API_BASE_URL}/categories`)
             promise.then(res=>{
                 setShowAll(true);
                 setCategories(res.data);
@@ -28,7 +28,7 @@ export default function CategorieList(){
             promise.catch(()=>alert('Houve um erro ao carregar as categorias'))
         }
         else{
-            const promise = axios.get('http://localhost:4000/categories?main=true')
+            const promise = axios.get(`${process.env.REACT_APP_API_BASE_URL}/categories?main=true`)
             promise.then(res=>{
                 setShowAll(false);
                 setCategories(res.data);

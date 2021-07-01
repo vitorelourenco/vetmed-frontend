@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import Form from "../Form";
 import UserContext from "../../contexts/UserContext";
+import CartContext from "../../contexts/CartContext";
 import { useState,useContext } from "react";
+import axios from "axios";
 
 class FormState {
   constructor(name, email) {
@@ -19,20 +21,46 @@ class FormState {
   }
 }
 
-export default function PlaceOrder({ cart }) {
-  const {user} = useContext(UserContext);
-  const [formState, setFormState] = useState(new FormState(user.name, user.email))
-  
-  function submitOrder(){
+export default function PlaceOrder({setShowCheckoutModal}) {
 
+  function submitOrder(){
+    const body = {};
+    const {name, email, street, number, adjunct, neighbourhood, postalCode} = formState;
+    body.name = name;
+    body.email = email;
+    body.street = street;
+    body.number = number;
+    body.adjunct = adjunct;
+    body.neighbourhood = neighbourhood;
+    body.postalCode = postalCode;
+    body.paymentType = "cc";
+
+    const config = {
+      headers : {
+        Authorization: `Bearer ${user.token}`
+      }
+    };
+
+    axios
+    .post("http://localhost:4000/orders",body,config)
+    .then(()=>{
+      setCart([]);
+      alert("Compra feita com sucesso");
+      setShowCheckoutModal(false);
+    })
+    .catch(err=>alert(err));
   }
+
+  const {cart, setCart} = useContext(CartContext);
+  const {user} = useContext(UserContext);
+  const [formState, setFormState] = useState(new FormState(user.name, user.email));
   
   return (
     <PlaceOrderWrapper>
-      <p>Resumo do seu pedido</p>
+      <p className="orderSummary">Resumo do seu pedido</p>
       <ListCart cart={cart} />
       <Form customSubmit={submitOrder}>
-        <p>Informações do usuário</p>
+        <p>Informações do destinatário</p>
         <label for="nome">Nome:</label>
         <input 
           required
@@ -57,7 +85,7 @@ export default function PlaceOrder({ cart }) {
             setFormState({...formState});
           }}
         />
-        <p>Endereço</p>
+        <p>Endereço do destinatário</p>
         <label for="street">Rua:</label>
         <input 
           required
@@ -82,9 +110,9 @@ export default function PlaceOrder({ cart }) {
             setFormState({...formState});
           }}
         />
+        {/* the one bellow isnt required */}
         <label for="adjunct">Complemento:</label>
         <input 
-          required
           id="adjunct"
           value={formState.adjunct}
           type="text"
@@ -217,13 +245,21 @@ const PlaceOrderWrapper = styled.div`
   border-radius: 10px;
   overflow-y: scroll;
 
+  table{
+    margin-bottom: 20px;
+  }
+
+  .orderSummary{
+    margin-bottom: 10px;
+  }
+
   form {
     font-size: 16px;
     gap: 5px;
 
     p{
       text-decoration: underline;
-      margin-top: 10px;
+      margin: 10px auto 5px auto;
     }
 
     input{

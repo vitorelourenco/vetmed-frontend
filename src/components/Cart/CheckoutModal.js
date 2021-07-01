@@ -53,7 +53,7 @@ export default function CheckoutModal({setShowCheckoutModal}){
         <p>{isAuthed?"Finalize seu pedido":"Faça login para prosseguir"}</p>
         <ExitModal />
       </Header>
-      {isAuthed?<PlaceOrder cart={cart}/>:<EmbededAuth />}
+      {isAuthed?<PlaceOrder setShowCheckoutModal={setShowCheckoutModal} cart={cart}/>:<EmbededAuth />}
     </StyledModal>
   );
 }
@@ -67,7 +67,7 @@ const StyledModal = styled(ReactModal)`
   transform: translate(-50%, -50%);
   max-width: 790px;
   width: 100%;
-  background: white;
+  background-color: #eee;
   border: 1px solid black;
   border-radius: 20px;
   user-select: none;
@@ -86,5 +86,6 @@ const Header = styled.header`
   font-weight: bold;
   font-family: Oswald, "sans-serif";
   margin-bottom: 8px;
+  padding: 0 10px;
   word-break: break-all;
 `;

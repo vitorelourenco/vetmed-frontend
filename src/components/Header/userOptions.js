@@ -36,6 +36,7 @@ const UserOptionsBox = styled.div`
   a,span{
     width: 100%;
     text-align: center;
+    cursor: pointer;
   }
   font-size:20px;
   line-height: 22px;

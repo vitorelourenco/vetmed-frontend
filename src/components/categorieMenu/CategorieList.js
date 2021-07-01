@@ -50,7 +50,7 @@ export default function CategorieList(){
                 </Categories>
             }
             <ShowCategories>
-                <button onClick={toggleCategories}>{showAll ? 'Principais Categorias':'Todas as categorias'}</button>
+                <button onClick={toggleCategories}>{(width && showAll) ? 'Principais Categorias':'Todas as categorias'}</button>
             </ShowCategories>
         </Body>
     );

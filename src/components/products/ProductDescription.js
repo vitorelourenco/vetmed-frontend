@@ -56,6 +56,7 @@ const Button = styled.button`
     position: absolute;
     top: 10px;
     right: 10px;
+    cursor: pointer;
 `
 const Cart = styled.div`
     max-height: 400px;
@@ -66,13 +67,15 @@ const Cart = styled.div`
     align-items: center;
     position: relative;
     text-align: center;
+    user-select: none;
     button{
-            border: none;
-            background-color: #c10000;
-            border-radius: 5px;
-            color:#fff;
-            font-weight: 700;
-            margin-top: 10px;
+        border: none;
+        background-color: #c10000;
+        border-radius: 5px;
+        color:#fff;
+        font-weight: 700;
+        margin-top: 10px;
+        cursor: pointer;
     }
     div{
         display: flex;
@@ -86,9 +89,11 @@ const Cart = styled.div`
 const Plus = styled(AiOutlinePlusCircle)`
     color: #848484;
     margin-left: 5px;
+    cursor: pointer;
 `
 const Minus = styled(AiOutlineMinusCircle)`
     color: #848484;
     margin-right: 5px;
+    cursor: pointer;
 `
 

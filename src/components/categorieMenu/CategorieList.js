@@ -46,7 +46,7 @@ export default function CategorieList(){
             {
                 (width || showAll) &&
                 <Categories>
-                {showAll ? categories?.map(c=> <Categorie key={c.id} categorie={c}/>):<div>{categories?.map(c=> <MainCategorie key={c.id} categorie={c} color={color[c.id-1]}/>)}</div>}
+                {showAll ? categories?.map(c=> <Categorie toggleCategories={toggleCategories} key={c.id} categorie={c}/>):<div>{categories?.map(c=> <MainCategorie key={c.id} categorie={c} color={color[c.id-1]}/>)}</div>}
                 </Categories>
             }
             <ShowCategories>
@@ -58,8 +58,8 @@ export default function CategorieList(){
 
 const Body = styled.div`
     width: 100%;
-    margin-top: 60px;
     color: #FF4949;
+    z-index: 1;
     h1{
         text-align: center;
         padding: 15px 0;
@@ -69,14 +69,23 @@ const Body = styled.div`
     }
     @media(min-width:750px){
         height: 308px;
+        margin-top: 60px;
+    }
+    @media(max-width:750px){
+        position: fixed;
+        top: 62px;
+        left: 0;
+    }
+    @media(max-width:589px){
+        position: fixed;
+        top: 106px;
+        left: 0;
     }
 `
 
 const Categories = styled.ul`
     width: 100%;
-    height: 213px;
     background-color: #fff;
-    border-radius: 0px 0px 0px 67px;
     padding: 0 11%;
     list-style-type: disc;
     display: flex;
@@ -85,6 +94,10 @@ const Categories = styled.ul`
     div{
         display: flex;
         justify-content: space-around;
+    }
+    @media(min-width:750px){
+        height: 213px;
+        border-radius: 0px 0px 0px 67px;
     }
 `
 const ShowCategories = styled.div`

@@ -84,6 +84,7 @@ function searchProducts(keyword, setSearchResults,setFocus) {
 const HeaderWrapper = styled.header`
   width: 100%;
   max-width: 1200px;
+  z-index: 1;
   background-image: linear-gradient(
     90deg,
     white,

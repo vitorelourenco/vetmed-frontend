@@ -3,44 +3,14 @@ import { AiOutlinePlusCircle, AiOutlineMinusCircle} from "react-icons/ai";
 import { useContext, useState } from "react";
 import CartContext from "../../contexts/CartContext";
 import ProductDescription from "./ProductDescription";
+import addToCart from "../../helper_functions/addToCart";
 
 export default function Product({product}){
     const [qtd,setQtd] = useState(0);
     const {cart,setCart} = useContext(CartContext)
     const [isOpen,setIsOpen] = useState(false)
 
-    function addToCart(){
-        const productInCart =cart?.find(c=>c.id ===product.id);
-        if(productInCart){
-            productInCart.qtd+=qtd;
-            productInCart.total = productInCart.qtd*product.price
-            setCart(cart)
-        }
-        else if(qtd>0){
-            cart ? 
-            setCart([...cart,{
-                id:product.id,
-                name:product.name,
-                description:product.description,
-                img:product.img,
-                price:product.price,
-                qtd,
-                total: qtd*product.price
-            }])
-            :
-            setCart([{
-                id:product.id,
-                name:product.name,
-                description:product.description,
-                img:product.img,
-                price:product.price,
-                qtd,
-                total: qtd*product.price
-
-            }])
-        }
-        setQtd(0)
-    }
+    
     return(
         <Body>
             <ProductDescription product={product} open={isOpen} setIsOpen={setIsOpen} qtd={qtd} setQtd={setQtd} addToCart={addToCart}/>
@@ -56,7 +26,7 @@ export default function Product({product}){
                         {qtd}
                         <Plus onClick={()=>setQtd(qtd+1)}/>
                     </div>
-                    <button onClick={addToCart}>Comprar</button>
+                    <button onClick={()=>addToCart(qtd,product,setQtd,cart,setCart)}>Comprar</button>
                 </Cart>
             </Bottom>
         </Body>

@@ -18,9 +18,7 @@ export default function Header() {
   const local = useLocation();
 
   function closeFocus(e){
-    console.log(e.relatedTarget?.firstChild?.localName )
-    console.log(e)
-    if(e.relatedTarget?.firstChild?.localName !=='img' && e.relatedTarget?.firstChild?.localName !=='div')
+    if(e.relatedTarget?.localName !=='button' && e.relatedTarget?.localName !=='div')
     {
       setFocus(false)
     }

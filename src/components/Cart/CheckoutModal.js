@@ -67,7 +67,8 @@ const StyledModal = styled(ReactModal)`
   transform: translate(-50%, -50%);
   max-width: 790px;
   width: 100%;
-  background: rgb(255, 153, 153);
+  background: white;
+  border: 1px solid black;
   border-radius: 20px;
   user-select: none;
 

@@ -19,15 +19,19 @@ class FormState {
   }
 }
 
-
 export default function PlaceOrder({ cart }) {
   const {user} = useContext(UserContext);
   const [formState, setFormState] = useState(new FormState(user.name, user.email))
+  
+  function submitOrder(){
+
+  }
+  
   return (
     <PlaceOrderWrapper>
       <p>Resumo do seu pedido</p>
       <ListCart cart={cart} />
-      <Form>
+      <Form customSubmit={submitOrder}>
         <p>Informações do usuário</p>
         <label for="nome">Nome:</label>
         <input 
@@ -66,7 +70,7 @@ export default function PlaceOrder({ cart }) {
             setFormState({...formState});
           }}
         />
-        <label for="adjunct">Número:</label>
+        <label for="number">Número:</label>
         <input 
           required
           id="number"
@@ -163,6 +167,7 @@ export default function PlaceOrder({ cart }) {
             setFormState({...formState});
           }}
         />
+        <button>Finalizar Pedido</button>
       </Form>
     </PlaceOrderWrapper>
   );

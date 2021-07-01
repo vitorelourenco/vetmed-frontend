@@ -26,14 +26,15 @@ export default function PlaceOrder({setShowCheckoutModal}) {
   function submitOrder(){
     const body = {};
     const {name, email, street, number, adjunct, neighbourhood, postalCode} = formState;
-    body.name = name;
-    body.email = email;
+    body.recipient = name;
+    body.recipientEmail = email;
     body.street = street;
     body.number = number;
     body.adjunct = adjunct;
     body.neighbourhood = neighbourhood;
     body.postalCode = postalCode;
     body.paymentType = "cc";
+    body.cart = cart.map(product=>({id:product.id, qtd:product.qtd}));
 
     const config = {
       headers : {

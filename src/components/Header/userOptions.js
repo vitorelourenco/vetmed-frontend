@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export function AuthedUserOptions(){
   return (
     <UserOptionsBox>
-      <Link to="/signup">Minhas compras</Link>
+      <Link to="/orders">Minhas compras</Link>
       <Link to="/login">Sair</Link>
     </UserOptionsBox>
   );

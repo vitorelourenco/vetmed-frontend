@@ -1,17 +1,11 @@
 import styled from "styled-components";
-
-import { Link } from "react-router-dom";
+import Result from "./Result";
 
 export default function SearchResults({ searchResults, className }) {
   return (
     <ResultsWrapper className={className}>
       <ul>
-        {searchResults?.map((result) => (
-          <li>
-            <img src={result.img}/>
-            <Link to={result.url}>{result.name}</Link>
-          </li>
-        )) || "Nenhum resultado encontrado"}
+        {searchResults?.map((result) => ( <Result result={result}/>)) || "Nenhum resultado encontrado"}
       </ul>
     </ResultsWrapper>
   );
@@ -39,16 +33,5 @@ const ResultsWrapper = styled.div`
   ::-webkit-scrollbar-thumb {
     background: #dad7d7;
   }
-  li{
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-    color:  var(--vivid-red);
-  }
-  img{
-    width:30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-right: 5px;
-  }
+  
 `;

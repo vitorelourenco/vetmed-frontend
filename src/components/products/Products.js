@@ -55,6 +55,12 @@ export default function Products(){
 const Body = styled.div`
     width: 100%;
     height: 100vh;
+    @media(max-width:750px){
+        margin-top: 134px;
+    }
+    @media(max-width:589px){
+        margin-top: 178px;
+    }
 `
 const Title = styled.h1`
     margin: 31px 0;
@@ -67,7 +73,8 @@ const ProductsList = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 35px;
     align-items: center;
     padding: 0 11%;
     width: 1300px;

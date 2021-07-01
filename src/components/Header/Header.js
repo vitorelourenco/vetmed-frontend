@@ -7,13 +7,24 @@ import MenuCheckout from "./MenuCheckout";
 import { DebounceInput } from "react-debounce-input";
 import axios from "axios";
 import SearchResults from "./SearchResults";
+import { useLocation } from "react-router-dom";
+import { AiOutlineClose } from "react-icons/ai";
 
 export default function Header() {
   const { user } = useContext(UserContext);
   const [searchResults, setSearchResults] = useState(null);
   const isAuthed = user ? true : false;
   const [focus,setFocus] = useState(false)
+  const local = useLocation();
 
+  function closeFocus(e){
+    if(e.relatedTarget?.localName !=='button' && e.relatedTarget?.localName !=='div')
+    {
+      setFocus(false)
+    }
+  }
+
+  if(local.pathname==='/signup'||local.pathname==='/login') return null
   return (
     <>
       <HeaderBackground />
@@ -27,14 +38,14 @@ export default function Header() {
           <img src={logo39} alt="VETMET LOGO" />
         </div>
         <div className="pageheader--menu">
-          <div className="menu--searchbarContainer">
+          <div className="menu--searchbarContainer" onBlur={closeFocus}>
+            <Close onClick={closeFocus}/>
             <DebounceInput
               className="searchbarContainer--searchbar"
               placeholder="O que você está buscando?"
               minLength={3}
               debounceTimeout={300}
               onFocus={(e)=>e.target.value.length> 2 && setFocus(true)}
-              onBlur={()=>setFocus(false)}
               onChange={(e) => {
                 searchProducts(e.target.value, setSearchResults,setFocus);
               }}
@@ -73,8 +84,7 @@ function searchProducts(keyword, setSearchResults,setFocus) {
 const HeaderWrapper = styled.header`
   width: 100%;
   max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  z-index: 2;
   background-image: linear-gradient(
     90deg,
     white,
@@ -85,9 +95,13 @@ const HeaderWrapper = styled.header`
   display: flex;
   position: fixed;
   top: 0;
-  left: 0;
+
   z-index: 10;
 
+  left: calc(50% - 600px);
+  @media(max-width:1200px){
+    left: 0;
+  }
   .pageheader--logobox {
     flex: 0 0 auto;
     display: flex;
@@ -130,7 +144,7 @@ const HeaderWrapper = styled.header`
 
     .menu--searchbarContainer {
       flex: 1 1 100vw;
-
+      position: relative;
       @media (max-width: 588px) {
         flex: initial;
         width: 100vw;
@@ -166,6 +180,7 @@ const HeaderWrapper = styled.header`
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
         max-height: 20vh;
+        z-index: 3;
       }
     }
   }
@@ -186,3 +201,10 @@ const HeaderBackground = styled.div`
   top: 0;
   left: 0;
 `;
+
+const Close = styled(AiOutlineClose)`
+  position: absolute;
+  top: 30%;
+  right: 10px;
+  color:  var(--vivid-red);
+`

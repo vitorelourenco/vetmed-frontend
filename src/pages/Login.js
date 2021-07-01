@@ -25,7 +25,7 @@ export default function Login() {
   function submitLogin() {
     setIsInteractive(false);
     axios
-      .post("http://localhost:4000/login", formState)
+      .post(`${process.env.REACT_APP_API_BASE_URL}/login`, formState)
       .then(({ data: user }) => {
         setUser(user);
         localStorage.setItem("user", JSON.stringify(user));

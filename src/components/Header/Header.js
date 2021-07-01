@@ -74,7 +74,7 @@ function searchProducts(keyword, setSearchResults,setFocus) {
   }
   setFocus(true)
   axios
-    .get(`http://localhost:4000/products/search?product=${keyword}`)
+    .get(`${process.env.REACT_APP_API_BASE_URL}/products/search?product=${keyword}`)
     .then(({ data }) => {
       data.length===0 ? setSearchResults(null):setSearchResults(data) ;
     })

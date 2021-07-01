@@ -34,7 +34,7 @@ function App() {
       setUser(localUser);
       const config = new Config(localUser.token);
       axios
-        .post("http://localhost:4000/login/withtoken", {}, config)
+        .post(`${process.env.REACT_APP_API_BASE_URL}/login/withtoken`, {}, config)
         .then(() => {
           // history.push("/");
         })

@@ -43,7 +43,7 @@ export default function PlaceOrder({setShowCheckoutModal}) {
     };
 
     axios
-    .post("http://localhost:4000/orders",body,config)
+    .post(`${process.env.REACT_APP_API_BASE_URL}/orders`,body,config)
     .then(()=>{
       setCart([]);
       alert("Compra feita com sucesso");
@@ -62,7 +62,7 @@ export default function PlaceOrder({setShowCheckoutModal}) {
       <ListCart cart={cart} />
       <Form customSubmit={submitOrder}>
         <p>Informações do destinatário</p>
-        <label for="nome">Nome:</label>
+        <label htmlFor="nome">Nome:</label>
         <input 
           required
           id="nome"
@@ -74,7 +74,7 @@ export default function PlaceOrder({setShowCheckoutModal}) {
             setFormState({...formState});
           }}
         />
-        <label for="email">email:</label>
+        <label htmlFor="email">email:</label>
         <input 
           required
           id="email"
@@ -87,7 +87,7 @@ export default function PlaceOrder({setShowCheckoutModal}) {
           }}
         />
         <p>Endereço do destinatário</p>
-        <label for="street">Rua:</label>
+        <label htmlFor="street">Rua:</label>
         <input 
           required
           id="street"
@@ -99,7 +99,7 @@ export default function PlaceOrder({setShowCheckoutModal}) {
             setFormState({...formState});
           }}
         />
-        <label for="number">Número:</label>
+        <label htmlFor="number">Número:</label>
         <input 
           required
           id="number"
@@ -112,7 +112,7 @@ export default function PlaceOrder({setShowCheckoutModal}) {
           }}
         />
         {/* the one bellow isnt required */}
-        <label for="adjunct">Complemento:</label>
+        <label htmlFor="adjunct">Complemento:</label>
         <input 
           id="adjunct"
           value={formState.adjunct}
@@ -123,7 +123,7 @@ export default function PlaceOrder({setShowCheckoutModal}) {
             setFormState({...formState});
           }}
         />
-        <label for="neighbourhood">Bairro:</label>
+        <label htmlFor="neighbourhood">Bairro:</label>
         <input 
           required
           id="neighbourhood"
@@ -135,7 +135,7 @@ export default function PlaceOrder({setShowCheckoutModal}) {
             setFormState({...formState});
           }}
         />
-        <label for="postalCode">CEP:</label>
+        <label htmlFor="postalCode">CEP:</label>
         <input 
           required
           id="postalCode"
@@ -148,7 +148,7 @@ export default function PlaceOrder({setShowCheckoutModal}) {
           }}
         />
         <p>Informações de pagamento</p>
-        <label for="nameOnCreditCard">Nome no cartão de crédito:</label>
+        <label htmlFor="nameOnCreditCard">Nome no cartão de crédito:</label>
         <input 
           required
           id="nameOnCreditCard"
@@ -160,7 +160,7 @@ export default function PlaceOrder({setShowCheckoutModal}) {
             setFormState({...formState});
           }}
         />
-        <label for="creditCardNumber">Número do cartão:</label>
+        <label htmlFor="creditCardNumber">Número do cartão:</label>
         <input 
           required
           id="creditCardNumber"
@@ -172,7 +172,7 @@ export default function PlaceOrder({setShowCheckoutModal}) {
             setFormState({...formState});
           }}
         />
-        <label for="expirationDate">Data de expiração:</label>
+        <label htmlFor="expirationDate">Data de expiração:</label>
         <input 
           required
           id="expirationDate"
@@ -184,7 +184,7 @@ export default function PlaceOrder({setShowCheckoutModal}) {
             setFormState({...formState});
           }}
         />
-        <label for="safetyCode">Código de segurança:</label>
+        <label htmlFor="safetyCode">Código de segurança:</label>
         <input 
           required
           id="safetyCode"
@@ -205,36 +205,42 @@ export default function PlaceOrder({setShowCheckoutModal}) {
 function ListCart({ cart }) {
   return (
     <TableWrapper>
-      <tr>
-        <th>Item</th>
-        <th>qtd</th>
-        <th>Total</th>
-      </tr>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>qtd</th>
+          <th>Total</th>
+        </tr>
+      </thead>
       {cart.map((product) => {
         return (
-          <tr key={product.id}>
-            <td>{product.name}</td>
-            <td>{product.qtd}</td>
-            <td>
-              R$
-              {((product.price * product.qtd) / 100)
-                .toFixed(2)
-                .replace(".", ",")}
-            </td>
-          </tr>
+          <tbody>
+            <tr key={product.id}>
+              <td>{product.name}</td>
+              <td>{product.qtd}</td>
+              <td>
+                R$
+                {((product.price * product.qtd) / 100)
+                  .toFixed(2)
+                  .replace(".", ",")}
+              </td>
+            </tr>
+          </tbody>
         );
       })}
-      <tr>
-        <td className="b-none"></td>
-        <td className="b-none"></td>
-        <td>R${cart
-          ?.reduce((acc, product) => {
-            return (acc += (product.qtd * product.price) / 100);
-          }, 0)
-          .toFixed(2)
-          .replace(".", ",") || "-"}
-        </td>
-      </tr>
+      <tbody>
+        <tr>
+          <td className="b-none"></td>
+          <td className="b-none"></td>
+          <td>R${cart
+            ?.reduce((acc, product) => {
+              return (acc += (product.qtd * product.price) / 100);
+            }, 0)
+            .toFixed(2)
+            .replace(".", ",") || "-"}
+          </td>
+        </tr>
+      </tbody>
     </TableWrapper>
   );
 }

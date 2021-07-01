@@ -16,15 +16,14 @@ export default function Products(){
 
     useEffect(()=>{
         if(id){
-            const promise = axios.get(`http://localhost:4000/products/?id=${id}&limit=8&offset=${(pageNumber-1)*8}`)
+            const promise = axios.get(`${process.env.REACT_APP_API_BASE_URL}/products/?id=${id}&limit=8&offset=${(pageNumber-1)*8}`)
             promise.then(res=>{
-                console.log(res.data)
                 setProducts(res.data.products)
                 setTitle(res.data.name);
             })
         }
         else{
-            const promise = axios.get(`http://localhost:4000/products?limit=8&offset=${(pageNumber-1)*8}`)
+            const promise = axios.get(`${process.env.REACT_APP_API_BASE_URL}/products?limit=8&offset=${(pageNumber-1)*8}`)
             promise.then(res=>{
                 setProducts(res.data.products)
                 setTitle(res.data.name);

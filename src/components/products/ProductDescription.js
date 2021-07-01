@@ -34,9 +34,9 @@ export default function ProductDescription({open,product,setIsOpen,qtd,setQtd,ad
 
 const Img = styled.img`
     max-width: 400px;
-    min-width: 320px;
+    min-width: 100px;
     max-height: 400px;
-    min-height: 320px;
+    min-height: 100px;
     border-radius: 5px;
     margin-right: 20px;
 `
@@ -59,7 +59,7 @@ const Button = styled.button`
 `
 const Cart = styled.div`
     max-height: 400px;
-    min-height: 320px;
+    min-height: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;

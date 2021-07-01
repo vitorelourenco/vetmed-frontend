@@ -22,8 +22,6 @@ export default function Header() {
     {
       setFocus(false)
     }
-
-    
   }
 
   if(local.pathname==='/signup'||local.pathname==='/login') return null
@@ -86,6 +84,7 @@ function searchProducts(keyword, setSearchResults,setFocus) {
 const HeaderWrapper = styled.header`
   width: 100%;
   max-width: 1200px;
+  z-index: 2;
   background-image: linear-gradient(
     90deg,
     white,
@@ -178,6 +177,7 @@ const HeaderWrapper = styled.header`
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
         max-height: 20vh;
+        z-index: 3;
       }
     }
   }

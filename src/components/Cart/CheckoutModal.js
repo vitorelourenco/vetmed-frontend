@@ -30,7 +30,7 @@ const useEmbededAuth = (callback) =>{
 export default function CheckoutModal({setShowCheckoutModal}){
   function ExitModal(){
     return (
-      <p style={{cursor:"pointer", flexShrink:"0", height: "100%"}} onClick={()=>setShowCheckoutModal(false)}>x</p>
+      <p style={{cursor:"pointer", flexShrink:"0", height: "100%"}} onClick={()=>setShowCheckoutModal(false)}>X</p>
     )
   }
   const {user, setUser} = useContext(UserContext);
@@ -50,6 +50,7 @@ export default function CheckoutModal({setShowCheckoutModal}){
       contentLabel="Checkout"
     >
       <Header>
+        <p>{isAuthed?"Finalize seu pedido":"Faça login para prosseguir"}</p>
         <ExitModal />
       </Header>
       {isAuthed?<PlaceOrder cart={cart}/>:<EmbededAuth />}
@@ -66,7 +67,7 @@ const StyledModal = styled(ReactModal)`
   transform: translate(-50%, -50%);
   max-width: 790px;
   width: 100%;
-  background: #eee;
+  background: rgb(255, 153, 153);
   border-radius: 20px;
   user-select: none;
 
@@ -77,8 +78,8 @@ const StyledModal = styled(ReactModal)`
 
 const Header = styled.header`
   display: flex;
-  justify-content: flex-end;
-  font-size: 38px;
+  justify-content: space-between;
+  font-size: 20px;
   line-height: 38px;
   color: #333;
   font-weight: bold;

@@ -16,7 +16,7 @@ export default function MainCategorie({categorie,color}){
 }
 const Body = styled.div`
     height: 189px;
-    min-width: 13%;
+    max-width: 156px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -26,7 +26,7 @@ const Name = styled.span`
     color:${props=>props.color};
 `
 const Figure = styled.div`
-    width: 156px;
+    max-width: 156px;
     height: 156px;
     border-radius: 50%;
     background-color: ${props=>props.color};

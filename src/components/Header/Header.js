@@ -22,8 +22,6 @@ export default function Header() {
     {
       setFocus(false)
     }
-
-    
   }
 
   if(local.pathname==='/signup'||local.pathname==='/login') return null

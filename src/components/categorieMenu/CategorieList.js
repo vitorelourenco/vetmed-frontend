@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Categorie from "./Categorie";
 import MainCategorie from "./MainCategorie";
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 export default function CategorieList(){
     const [categories,setCategories] = useState(null);
     const [showAll,setShowAll] = useState(false);
-    const color = ['#58479A','#9A7E47','#479A86','#9A4797','#9A4747']
+    const color = ['#58479A','#9A7E47','#479A86','#9A4797','#9A4747'];
+    const width = useMediaQuery('(min-width:750px)')
     useEffect(()=>{
         const promise = axios.get('http://localhost:4000/categories?main=true')
         promise.then(res=>{
@@ -38,10 +40,15 @@ export default function CategorieList(){
 
     return (
         <Body>
-            <h1>{showAll ? 'Todas as categorias':'Principais Categorias'}</h1>
-            <Categories>
+            {
+                (width || showAll) && <h1>{showAll ? 'Todas as categorias':'Principais Categorias'}</h1>
+            }
+            {
+                (width || showAll) &&
+                <Categories>
                 {showAll ? categories?.map(c=> <Categorie key={c.id} categorie={c}/>):<div>{categories?.map(c=> <MainCategorie key={c.id} categorie={c} color={color[c.id-1]}/>)}</div>}
-            </Categories>
+                </Categories>
+            }
             <ShowCategories>
                 <button onClick={toggleCategories}>{showAll ? 'Principais Categorias':'Todas as categorias'}</button>
             </ShowCategories>
@@ -51,7 +58,6 @@ export default function CategorieList(){
 
 const Body = styled.div`
     width: 100%;
-    height: 308px;
     margin-top: 60px;
     color: #FF4949;
     h1{
@@ -60,6 +66,9 @@ const Body = styled.div`
         font-size: 24px;
         width: 100%;
         background-color: #fff;
+    }
+    @media(min-width:750px){
+        height: 308px;
     }
 `
 
@@ -89,6 +98,9 @@ const ShowCategories = styled.div`
             border: none;
             border-radius: 0px 0px 67px 67px;
             color:inherit;
+            @media(max-width:750px){
+                width: 100%;
+            }
         }
         button:hover{
             cursor: pointer;

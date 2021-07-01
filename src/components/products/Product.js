@@ -2,10 +2,12 @@ import styled from "styled-components";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle} from "react-icons/ai";
 import { useContext, useState } from "react";
 import CartContext from "../../contexts/CartContext";
+import ProductDescription from "./ProductDescription";
 
 export default function Product({product}){
     const [qtd,setQtd] = useState(0);
     const {cart,setCart} = useContext(CartContext)
+    const [isOpen,setIsOpen] = useState(false)
 
     function addToCart(){
         const productInCart =cart?.find(c=>c.id ===product.id);
@@ -41,8 +43,11 @@ export default function Product({product}){
     }
     return(
         <Body>
+            <ProductDescription product={product} open={isOpen} setIsOpen={setIsOpen}/>
+            <div onClick={()=>{setIsOpen(true)}}>
             <img src={product.img} alt={product.name}/>
             <span>{product.name}</span>
+            </div>
             <Bottom>
                 <span>R${(product.price/100).toFixed(2).replace('.',',')}</span>
                 <Cart>
@@ -50,7 +55,6 @@ export default function Product({product}){
                         <Minus onClick={()=>qtd>0 && setQtd(qtd-1)}/>
                         {qtd}
                         <Plus onClick={()=>setQtd(qtd+1)}/>
-                        
                     </div>
                     <button onClick={addToCart}>Comprar</button>
                 </Cart>
@@ -107,11 +111,11 @@ const Cart = styled.div`
 const Plus = styled(AiOutlinePlusCircle)`
     font-size: 25px;
     color: #848484;
-    margin-right: 5px;
+    margin-left: 5px;
 `
 const Minus = styled(AiOutlineMinusCircle)`
     font-size: 25px;
     color: #848484;
-    margin-left: 5px;
+    margin-right: 5px;
 `
 

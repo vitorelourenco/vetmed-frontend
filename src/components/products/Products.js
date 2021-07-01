@@ -18,7 +18,6 @@ export default function Products(){
         if(id){
             const promise = axios.get(`${process.env.REACT_APP_API_BASE_URL}/products/?id=${id}&limit=8&offset=${(pageNumber-1)*8}`)
             promise.then(res=>{
-                console.log(res.data)
                 setProducts(res.data.products)
                 setTitle(res.data.name);
             })

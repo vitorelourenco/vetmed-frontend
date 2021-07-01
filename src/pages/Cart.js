@@ -1,16 +1,12 @@
 import styled from "styled-components";
 import FlexCartRows from "../components/Cart/FlexCartRows";
-import Form from "../components/Form";
 import { useState, useContext } from "react";
-import { useHistory } from "react-router";
-import UserContext from "../contexts/UserContext";
 import Header from "../components/Header/Header";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import CheckoutModal from "../components/Cart/CheckoutModal";
 import CartContext from "../contexts/CartContext";
 
 export default function Cart() {
-  const { user, setUser } = useContext(UserContext);
 
   const [showCheckoutModal, setShowCheckoutModal] = useState(false);
   const {cart} = useContext(CartContext);

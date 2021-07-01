@@ -99,7 +99,7 @@ const PageWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
   width: 100%;
   max-width: 600px;
   margin-left: auto;

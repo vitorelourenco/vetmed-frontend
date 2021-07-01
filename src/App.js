@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { BrowserRouter, useHistory } from "react-router-dom";
 import { Switch,Route } from "react-router";
 import axios from "axios";
+import Modal from "react-modal";
 
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Products from "./components/products/Products";
+import Cart from "./pages/Cart";
 
 import UserContext from "./contexts/UserContext";
 
@@ -16,6 +18,8 @@ import Header from './components/Header/Header';
 import Config from "./helper_functions/Config";
 import logOut from "./helper_functions/logout";
 import CartContext from "./contexts/CartContext";
+
+Modal.setAppElement(document.querySelector("#root"));
 
 function App() {
   const [user, setUser] = useState(null);
@@ -32,7 +36,7 @@ function App() {
       axios
         .post("http://localhost:4000/login/withtoken", {}, config)
         .then(() => {
-          history.push("/");
+          // history.push("/");
         })
         .catch((err) => {
           alert(err);
@@ -70,6 +74,9 @@ function App() {
             </Route>
             <Route path="/categories/:id" exact>
               <Products/>
+            </Route>
+            <Route path="/cart" exact>
+              <Cart/>
             </Route>
           </Switch>
         </BrowserRouter>

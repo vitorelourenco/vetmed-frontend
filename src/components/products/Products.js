@@ -6,6 +6,9 @@ import CategorieList from "../categorieMenu/CategorieList";
 import Product from "./Product";
 
 export default function Products(){
+    //send a message to parent element when accessed (used for iframe logic)
+    window.parent.postMessage('url_changed', '*');
+
     const [products,setProducts] = useState(null)
     const {id} = useParams();
     const [title,setTitle]= useState("");

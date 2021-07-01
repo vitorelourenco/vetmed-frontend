@@ -95,6 +95,9 @@ const HeaderWrapper = styled.header`
   display: flex;
   position: fixed;
   top: 0;
+
+  z-index: 10;
+
   left: calc(50% - 600px);
   @media(max-width:1200px){
     left: 0;

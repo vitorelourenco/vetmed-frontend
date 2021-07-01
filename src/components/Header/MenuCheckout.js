@@ -7,7 +7,7 @@ import CartContext from '../../contexts/CartContext';
 export default function MenuCheckout(){
   const {cart} = useContext(CartContext)
   return(
-    <MenuWrapper to="/checkout">
+    <MenuWrapper to="/cart">
       <Cart />
       <ItemCounter numberOfItems={cart?.length || 0}/>
       <p className="checkout--text">Finalizar<br/>Pedido</p>

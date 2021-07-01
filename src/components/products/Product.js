@@ -10,7 +10,6 @@ export default function Product({product}){
     const {cart,setCart} = useContext(CartContext)
     const [isOpen,setIsOpen] = useState(false)
 
-    console.log(cart)
     return(
         <Body>
             <ProductDescription product={product} open={isOpen} setIsOpen={setIsOpen} qtd={qtd} setQtd={setQtd} addToCart={addToCart} cart={cart} setCart={setCart}/>

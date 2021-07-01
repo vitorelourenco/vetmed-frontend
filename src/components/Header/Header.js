@@ -207,4 +207,5 @@ const Close = styled(AiOutlineClose)`
   top: 30%;
   right: 10px;
   color:  var(--vivid-red);
+  cursor: pointer;
 `

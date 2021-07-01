@@ -14,7 +14,7 @@ import UserContext from "./contexts/UserContext";
 import GlobalStyles from "./styles/GlobalStyles";
 import { PublicOnlyRoute } from "./components/PrivateRoute";
 import Header from './components/Header/Header';
-
+import Orders from "./components/Orders";
 import Config from "./helper_functions/Config";
 import logOut from "./helper_functions/logout";
 import CartContext from "./contexts/CartContext";
@@ -77,6 +77,9 @@ function App() {
             </Route>
             <Route path="/cart" exact>
               <Cart/>
+            </Route>
+            <Route path="/orders" exact>
+              <Orders/>
             </Route>
           </Switch>
         </BrowserRouter>

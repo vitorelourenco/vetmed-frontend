@@ -15,7 +15,7 @@ export default function Product({product}){
             <ProductDescription product={product} open={isOpen} setIsOpen={setIsOpen} qtd={qtd} setQtd={setQtd} addToCart={addToCart} cart={cart} setCart={setCart}/>
             <div onClick={()=>{setIsOpen(true)}}>
             <img src={product.img} alt={product.name}/>
-            <span>{product.name}</span>
+            <Title>{product.name}</Title>
             </div>
             <Bottom>
                 <span>R${(product.price/100).toFixed(2).replace('.',',')}</span>
@@ -38,15 +38,18 @@ const Body = styled.div`
     border-radius: 10px;
     margin-bottom: 25px;
     position: relative;
+    user-select: none;
     img{
         width: 100%;
         height: 125px;
         border-radius: 10px;
+        cursor: pointer;
     }
-    span{
-        color: #333;
-        margin: 11px;
-    }
+`
+const Title = styled.span`
+    color: #333;
+    margin: 11px;
+    cursor: pointer;
 `
 const Bottom = styled.div`
     position: absolute;
@@ -70,6 +73,7 @@ const Cart = styled.div`
         border-radius: 5px;
         color:#fff;
         font-weight: 700;
+        cursor: pointer;
     }
     div{
         display: flex;
@@ -81,10 +85,12 @@ const Plus = styled(AiOutlinePlusCircle)`
     font-size: 25px;
     color: #848484;
     margin-left: 5px;
+    cursor: pointer;
 `
 const Minus = styled(AiOutlineMinusCircle)`
     font-size: 25px;
     color: #848484;
     margin-right: 5px;
+    cursor: pointer;
 `
 

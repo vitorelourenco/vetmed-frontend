@@ -10,7 +10,7 @@ export default function MenuCheckout(){
     <MenuWrapper to="/cart">
       <Cart />
       <ItemCounter numberOfItems={cart?.length || 0}/>
-      <p className="checkout--text">Finalizar<br/>Pedido</p>
+      <p className="checkout--text">Ver<br/>Carrinho</p>
     </MenuWrapper>
   );
 }

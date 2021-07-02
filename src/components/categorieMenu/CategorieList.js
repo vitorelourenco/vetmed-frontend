@@ -5,7 +5,7 @@ import Categorie from "./Categorie";
 import MainCategorie from "./MainCategorie";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-export default function CategorieList() {
+export default function CategorieList({setPageNumber}) {
   const [categories, setCategories] = useState(null);
   const [showAll, setShowAll] = useState(false);
   const color = ["#58479A", "#9A7E47", "#479A86", "#9A4797", "#9A4747"];
@@ -55,6 +55,7 @@ export default function CategorieList() {
                 toggleCategories={toggleCategories}
                 key={c.id}
                 categorie={c}
+                setPageNumber={setPageNumber}
               />
             ))
           ) : (
@@ -64,6 +65,7 @@ export default function CategorieList() {
                   key={c.id}
                   categorie={c}
                   color={color[c.id - 1]}
+                  setPageNumber={setPageNumber}
                 />
               ))}
             </div>

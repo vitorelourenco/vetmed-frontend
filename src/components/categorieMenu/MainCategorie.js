@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export default function MainCategorie({categorie,color}){
+export default function MainCategorie({categorie,color,setPageNumber}){
     return(
         <StyledLink to={`/categories/${categorie.id}`}>
-            <ResponsiveCategory>
+            <ResponsiveCategory onClick={()=>setPageNumber(1)}>
                 <Body>
                     <Figure color={color}>
                         <img src={categorie.img} alt={categorie.name}/>

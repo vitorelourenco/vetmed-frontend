@@ -32,7 +32,7 @@ export default function Products(){
     },[id,pageNumber])
     return (
         <Body>
-            <CategorieList/>
+            <CategorieList setPageNumber={setPageNumber}/>
             <Title>{title}</Title>
             <ProductsList length={products?.length}>
                 {products?.map(p=><Product key={p.id}  product={p}/>)}

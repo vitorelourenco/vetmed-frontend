@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default function Categorie({categorie,toggleCategories}){
+export default function Categorie({categorie,toggleCategories,setPageNumber}){
     return(
         <Link to={`/categories/${categorie.id}`}>
-            <Body onClick={toggleCategories}>
+            <Body onClick={()=>{toggleCategories();setPageNumber(1)}}>
                 {categorie.name}
             </Body>
         </Link>

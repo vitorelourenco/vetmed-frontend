@@ -1,6 +1,10 @@
 import styled from "styled-components";
-
+import { useLocation } from "react-router";
 export default function Footer(){
+  const pathname = useLocation().pathname;
+  
+  if(pathname==='/signup'||pathname==='/login') return null
+
   return (
   <FooterWrapper>
     <p>vetmed ltda</p>

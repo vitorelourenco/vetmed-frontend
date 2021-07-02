@@ -5,7 +5,7 @@ export default function SearchResults({ searchResults, className }) {
   return (
     <ResultsWrapper className={className}>
       <ul>
-        {searchResults?.map((result) => ( <Result result={result}/>)) || "Nenhum resultado encontrado"}
+        {searchResults?.map((result) => ( <Result key={result.id} result={result}/>)) || "Nenhum resultado encontrado"}
       </ul>
     </ResultsWrapper>
   );

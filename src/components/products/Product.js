@@ -34,12 +34,13 @@ export default function Product({product}){
 
 const Body = styled.div`
     width: 206px;
-    height: 241px;
+    height: 300px;
     background-color: #fff;
     border-radius: 10px;
     margin-bottom: 25px;
     position: relative;
     user-select: none;
+    padding-bottom: 50px;
     img{
         width: 100%;
         height: 125px;
@@ -52,6 +53,7 @@ const Title = styled.p`
     margin: 6px 11px;
     cursor: pointer;
 `
+
 const Bottom = styled.div`
     position: absolute;
     width: 100%;

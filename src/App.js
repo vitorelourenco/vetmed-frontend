@@ -35,9 +35,6 @@ function App() {
       const config = new Config(localUser.token);
       axios
         .post(`${process.env.REACT_APP_API_BASE_URL}/login/withtoken`, {}, config)
-        .then(() => {
-          // history.push("/");
-        })
         .catch((err) => {
           alert(err);
           logOut(localUser, setUser, history);

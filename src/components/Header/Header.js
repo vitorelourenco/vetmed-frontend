@@ -7,7 +7,7 @@ import MenuCheckout from "./MenuCheckout";
 import { DebounceInput } from "react-debounce-input";
 import axios from "axios";
 import SearchResults from "./SearchResults";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 
 export default function Header() {
@@ -29,14 +29,14 @@ export default function Header() {
     <>
       <HeaderBackground />
       <HeaderWrapper>
-        <div className="pageheader--logobox">
+        <Link to="/" className="pageheader--logobox">
           <p className="logobox--text">
             vet
             <br />
             med
           </p>
           <img src={logo39} alt="VETMET LOGO" />
-        </div>
+        </Link>
         <div className="pageheader--menu">
           <div className="menu--searchbarContainer" onBlur={closeFocus}>
             <Close onClick={closeFocus}/>

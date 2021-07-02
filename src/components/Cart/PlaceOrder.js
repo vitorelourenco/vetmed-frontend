@@ -45,7 +45,7 @@ export default function PlaceOrder({setShowCheckoutModal}) {
     axios
     .post(`${process.env.REACT_APP_API_BASE_URL}/orders`,body,config)
     .then(()=>{
-      setCart(null);
+      setCart([]);
       alert("Compra feita com sucesso");
       setShowCheckoutModal(false);
     })

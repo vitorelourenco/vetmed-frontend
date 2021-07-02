@@ -56,7 +56,7 @@ const Body = styled.div`
     @media(max-width:750px){
         margin-top: 134px;
     }
-    @media(max-width:589px){
+    @media(max-width:588px){
         margin-top: 178px;
     }
 `

@@ -103,7 +103,7 @@ const Body = styled.div`
     top: 62px;
     left: 0;
   }
-  @media (max-width: 589px) {
+  @media (max-width: 588px) {
     position: fixed;
     top: 106px;
     left: 0;

@@ -10,7 +10,7 @@ export default function Orders(){
 const Body = styled.div`
     display: flex;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 62px);
     justify-content: center;
     align-items: center;
     text-align: center;

@@ -18,6 +18,7 @@ import Orders from "./components/Orders";
 import Config from "./helper_functions/Config";
 import logOut from "./helper_functions/logout";
 import CartContext from "./contexts/CartContext";
+import Footer from './components/Footer';
 
 Modal.setAppElement(document.querySelector("#root"));
 
@@ -79,6 +80,7 @@ function App() {
               <Orders/>
             </Route>
           </Switch>
+          <Footer />
         </BrowserRouter>
       </CartContext.Provider>
     </UserContext.Provider>

@@ -167,6 +167,10 @@ const HeaderWrapper = styled.header`
         @media (max-width: 768px) {
           font-size: 18px;
         }
+
+        @media (max-width: 588px) {
+          width: calc(100% - 20px);
+        }
       }
 
       .searchbarContainer--searchbar::placeholder {

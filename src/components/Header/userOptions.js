@@ -9,7 +9,7 @@ export function AuthedUserOptions(){
   const {user, setUser} = useContext(UserContext);
   return (
     <UserOptionsBox>
-      <Link to="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Minhas compras</Link>
+      <Link to="/orders">Minhas compras</Link>
       <span onClick={()=>logOut(user, setUser, history)}>Sair</span>
     </UserOptionsBox>
   );

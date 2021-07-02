@@ -53,7 +53,6 @@ export default function Products(){
 
 const Body = styled.div`
     width: 100%;
-    height: 100vh;
     @media(max-width:750px){
         margin-top: 134px;
     }
@@ -76,11 +75,11 @@ const ProductsList = styled.div`
     gap: 35px;
     align-items: center;
     padding: 0 11%;
-    width: 1300px;
+    max-width: 1220px;
+    padding-left: 72px;
+    padding-right: 72px;
+    width: 100%;
     margin: 0 auto;
-    @media(max-width:1300px){
-        width: 100%;
-    }
 `
 const ChangePage = styled.div`
 width: 100%;

@@ -31,6 +31,7 @@ export default function Product({product}){
         </Body>
     )
 }
+
 const Body = styled.div`
     width: 206px;
     height: 241px;
@@ -46,9 +47,9 @@ const Body = styled.div`
         cursor: pointer;
     }
 `
-const Title = styled.span`
+const Title = styled.p`
     color: #333;
-    margin: 11px;
+    margin: 6px 11px;
     cursor: pointer;
 `
 const Bottom = styled.div`
@@ -58,6 +59,7 @@ const Bottom = styled.div`
     left: 0;
     padding: 0 11px;
     span{
+        font-weight: bold;
         margin: 0;
         color: #000;
     }
